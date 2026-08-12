@@ -22,21 +22,30 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    - name: Auto-Fix Duplicate Folder Paths
+    - name: Auto-Fix Paths & Setup App Icon
       run: |
-        echo "Fixing structure..."
+        echo "Organizing files and icons..."
         mkdir -p app/src/main/java/com/pathsathi/app
-        
-        # Find and move AndroidManifest.xml to correct location
+        mkdir -p app/src/main/res/mipmap-hdpi
+        mkdir -p app/src/main/res/drawable
+
+        # Auto-fix Manifest and Activity
         MANIFEST_FILE=$(find app -name "AndroidManifest.xml" | head -n 1)
         if [ -n "$MANIFEST_FILE" ]; then
           cp "$MANIFEST_FILE" app/src/main/AndroidManifest.xml
         fi
-        
-        # Find and move MainActivity.kt to correct location
+
         ACTIVITY_FILE=$(find app -name "MainActivity.kt" | head -n 1)
         if [ -n "$ACTIVITY_FILE" ]; then
           cp "$ACTIVITY_FILE" app/src/main/java/com/pathsathi/app/MainActivity.kt
+        fi
+
+        # Auto-detect uploaded logo image
+        LOGO_FILE=$(find . -maxdepth 3 \( -name "*logo*.png" -o -name "*icon*.png" -o -name "ic_launcher.png" -o -name "*.png" \) | grep -v "gradle" | head -n 1)
+        if [ -n "$LOGO_FILE" ]; then
+          echo "Found logo image at $LOGO_FILE, setting as App Icon..."
+          cp "$LOGO_FILE" app/src/main/res/mipmap-hdpi/ic_launcher.png
+          cp "$LOGO_FILE" app/src/main/res/drawable/ic_launcher.png
         fi
 
     - name: Generate Wrapper & Build APK
