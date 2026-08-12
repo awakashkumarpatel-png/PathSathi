@@ -19,7 +19,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Generate Lightweight Android App
+    - name: Generate Zero-Dependency App
       run: |
         # 1. Root settings.gradle.kts
         cat << 'EOF' > settings.gradle.kts
@@ -45,7 +45,6 @@ jobs:
         cat << 'EOF' > build.gradle.kts
         plugins {
             id("com.android.application") version "8.2.2" apply false
-            id("org.jetbrains.kotlin.android") version "1.9.22" apply false
         }
         EOF
 
@@ -54,11 +53,10 @@ jobs:
         mkdir -p app/src/main/res/layout
         mkdir -p app/src/main/res/drawable
 
-        # 4. App build.gradle.kts
+        # 4. App build.gradle.kts (No External Heavy Libraries)
         cat << 'EOF' > app/build.gradle.kts
         plugins {
             id("com.android.application")
-            id("org.jetbrains.kotlin.android")
         }
 
         android {
@@ -77,15 +75,6 @@ jobs:
                 sourceCompatibility = JavaVersion.VERSION_17
                 targetCompatibility = JavaVersion.VERSION_17
             }
-            kotlinOptions {
-                jvmTarget = "17"
-            }
-        }
-
-        dependencies {
-            implementation("androidx.core:core-ktx:1.12.0")
-            implementation("androidx.appcompat:appcompat:1.6.1")
-            implementation("com.google.android.material:material:1.11.0")
         }
         EOF
 
@@ -97,7 +86,7 @@ jobs:
                 android:allowBackup="true"
                 android:label="Path Sathi"
                 android:supportsRtl="true"
-                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+                android:theme="@android:style/Theme.Material.Light.NoActionBar">
                 <activity
                     android:name=".MainActivity"
                     android:exported="true">
@@ -110,17 +99,18 @@ jobs:
         </manifest>
         EOF
 
-        # 6. MainActivity.kt
-        cat << 'EOF' > app/src/main/java/com/pathsathi/app/MainActivity.kt
-        package com.pathsathi.app
+        # 6. MainActivity.java
+        cat << 'EOF' > app/src/main/java/com/pathsathi/app/MainActivity.java
+        package com.pathsathi.app;
 
-        import android.os.Bundle
-        import androidx.appcompat.app.AppCompatActivity
+        import android.app.Activity;
+        import android.os.Bundle;
 
-        class MainActivity : AppCompatActivity() {
-            override fun onCreate(savedInstanceState: Bundle?) {
-                super.onCreate(savedInstanceState)
-                setContentView(R.layout.activity_main)
+        public class MainActivity extends Activity {
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_main);
             }
         }
         EOF
@@ -170,5 +160,3 @@ jobs:
       with:
         name: PathSathi-Debug-APK
         path: app/build/outputs/apk/debug/app-debug.apk
-
-        
