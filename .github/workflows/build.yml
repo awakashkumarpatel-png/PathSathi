@@ -22,8 +22,28 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    - name: Build Debug APK
-      run: gradle assembleDebug --stacktrace
+    - name: Auto-Fix Duplicate Folder Paths
+      run: |
+        echo "Fixing structure..."
+        mkdir -p app/src/main/java/com/pathsathi/app
+        
+        # Find and move AndroidManifest.xml to correct location
+        MANIFEST_FILE=$(find app -name "AndroidManifest.xml" | head -n 1)
+        if [ -n "$MANIFEST_FILE" ]; then
+          cp "$MANIFEST_FILE" app/src/main/AndroidManifest.xml
+        fi
+        
+        # Find and move MainActivity.kt to correct location
+        ACTIVITY_FILE=$(find app -name "MainActivity.kt" | head -n 1)
+        if [ -n "$ACTIVITY_FILE" ]; then
+          cp "$ACTIVITY_FILE" app/src/main/java/com/pathsathi/app/MainActivity.kt
+        fi
+
+    - name: Generate Wrapper & Build APK
+      run: |
+        gradle wrapper --gradle-version 8.4
+        chmod +x gradlew
+        ./gradlew assembleDebug --stacktrace
 
     - name: Upload Debug APK
       uses: actions/upload-artifact@v4
