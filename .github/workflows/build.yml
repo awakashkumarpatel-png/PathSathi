@@ -22,23 +22,9 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    - name: Create Clean Structure & App Icon
+    - name: Setup Vector App Icon
       run: |
-        mkdir -p app/src/main/java/com/pathsathi/app
         mkdir -p app/src/main/res/drawable
-
-        # Auto-fix Manifest and Activity location
-        MANIFEST_FILE=$(find app -name "AndroidManifest.xml" | head -n 1)
-        if [ -n "$MANIFEST_FILE" ]; then
-          cp "$MANIFEST_FILE" app/src/main/AndroidManifest.xml
-        fi
-
-        ACTIVITY_FILE=$(find app -name "MainActivity.kt" | head -n 1)
-        if [ -n "$ACTIVITY_FILE" ]; then
-          cp "$ACTIVITY_FILE" app/src/main/java/com/pathsathi/app/MainActivity.kt
-        fi
-
-        # Generate Vector App Icon automatically
         cat << 'EOF' > app/src/main/res/drawable/ic_launcher_foreground.xml
         <vector xmlns:android="http://schemas.android.com/apk/res/android"
             android:width="108dp"
