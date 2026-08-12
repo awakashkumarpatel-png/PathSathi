@@ -19,7 +19,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Generate Zero-Dependency App
+    - name: Generate Complete Path Sathi App
       run: |
         # 1. Root settings.gradle.kts
         cat << 'EOF' > settings.gradle.kts
@@ -53,7 +53,7 @@ jobs:
         mkdir -p app/src/main/res/layout
         mkdir -p app/src/main/res/drawable
 
-        # 4. App build.gradle.kts (No External Heavy Libraries)
+        # 4. App build.gradle.kts
         cat << 'EOF' > app/build.gradle.kts
         plugins {
             id("com.android.application")
@@ -82,6 +82,9 @@ jobs:
         cat << 'EOF' > app/src/main/AndroidManifest.xml
         <?xml version="1.0" encoding="utf-8"?>
         <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.INTERNET" />
+
             <application
                 android:allowBackup="true"
                 android:label="Path Sathi"
@@ -105,32 +108,171 @@ jobs:
 
         import android.app.Activity;
         import android.os.Bundle;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.Toast;
 
         public class MainActivity extends Activity {
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_main);
+
+                Button btnSearch = findViewById(R.id.btnSearch);
+                Button btnSos = findViewById(R.id.btnSos);
+
+                if (btnSearch != null) {
+                    btnSearch.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MainActivity.this, "Finding best routes for Path Sathi...", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                if (btnSos != null) {
+                    btnSos.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MainActivity.this, "Emergency SOS Alert Triggered!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         }
         EOF
 
-        # 7. activity_main.xml
+        # 7. activity_main.xml (Rich Dashboard UI)
         cat << 'EOF' > app/src/main/res/layout/activity_main.xml
         <?xml version="1.0" encoding="utf-8"?>
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:background="#F5F7FA"
+            android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Welcome to Path Sathi!"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
-        </RelativeLayout>
+                android:orientation="vertical">
+
+                <!-- Header -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Path Sathi 🚀"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#1E293B"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Smart Travel & Safety Companion"
+                    android:textSize="14sp"
+                    android:textColor="#64748B"
+                    android:layout_marginBottom="20dp"/>
+
+                <!-- Search Route Box -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginBottom="20dp">
+
+                    <EditText
+                        android:id="@+id/etStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="📍 Start Location (Current)"
+                        android:padding="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="#F1F5F9"/>
+
+                    <EditText
+                        android:id="@+id/etEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="🏁 Destination"
+                        android:padding="10dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#F1F5F9"/>
+
+                    <Button
+                        android:id="@+id/btnSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Search Routes & Transport"
+                        android:background="#2563EB"
+                        android:textColor="#FFFFFF"/>
+                </LinearLayout>
+
+                <!-- Features Section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quick Services"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#1E293B"
+                    android:layout_marginBottom="10dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🚌 Bus Timings & Stops"
+                    android:background="#059669"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginBottom="10dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="🗺️ Live GPS Navigation"
+                    android:background="#0284C7"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginBottom="20dp"/>
+
+                <!-- Emergency SOS Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#FEF2F2"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Safety First 🛡️"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#991B1B"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tap SOS in case of any emergency during travel."
+                        android:textSize="12sp"
+                        android:textColor="#7F1D1D"
+                        android:layout_marginBottom="10dp"/>
+
+                    <Button
+                        android:id="@+id/btnSos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="🚨 EMERGENCY SOS"
+                        android:background="#DC2626"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
         EOF
 
         # 8. App Icon
