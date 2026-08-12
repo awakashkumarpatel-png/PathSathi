@@ -19,7 +19,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Auto-Generate Clean Project Files
+    - name: Generate Lightweight Android App
       run: |
         # 1. Root settings.gradle.kts
         cat << 'EOF' > settings.gradle.kts
@@ -51,6 +51,7 @@ jobs:
 
         # 3. Directories
         mkdir -p app/src/main/java/com/pathsathi/app
+        mkdir -p app/src/main/res/layout
         mkdir -p app/src/main/res/drawable
 
         # 4. App build.gradle.kts
@@ -79,23 +80,12 @@ jobs:
             kotlinOptions {
                 jvmTarget = "17"
             }
-            buildFeatures {
-                compose = true
-            }
-            composeOptions {
-                kotlinCompilerExtensionVersion = "1.5.8"
-            }
         }
 
         dependencies {
             implementation("androidx.core:core-ktx:1.12.0")
-            implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-            implementation("androidx.activity:activity-compose:1.8.2")
-            implementation(platform("androidx.compose:compose-bom:2024.02.00"))
-            implementation("androidx.compose.ui:ui")
-            implementation("androidx.compose.ui:ui-graphics")
-            implementation("androidx.compose.ui:ui-tooling-preview")
-            implementation("androidx.compose.material3:material3")
+            implementation("androidx.appcompat:appcompat:1.6.1")
+            implementation("com.google.android.material:material:1.11.0")
         }
         EOF
 
@@ -107,7 +97,7 @@ jobs:
                 android:allowBackup="true"
                 android:label="Path Sathi"
                 android:supportsRtl="true"
-                android:theme="@android:style/Theme.Material.NoTitleBar">
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
                 <activity
                     android:name=".MainActivity"
                     android:exported="true">
@@ -125,29 +115,35 @@ jobs:
         package com.pathsathi.app
 
         import android.os.Bundle
-        import androidx.activity.ComponentActivity
-        import androidx.activity.compose.setContent
-        import androidx.compose.foundation.layout.fillMaxSize
-        import androidx.compose.material3.MaterialTheme
-        import androidx.compose.material3.Surface
-        import androidx.compose.material3.Text
-        import androidx.compose.ui.Modifier
+        import androidx.appcompat.app.AppCompatActivity
 
-        class MainActivity : ComponentActivity() {
+        class MainActivity : AppCompatActivity() {
             override fun onCreate(savedInstanceState: Bundle?) {
                 super.onCreate(savedInstanceState)
-                setContent {
-                    MaterialTheme {
-                        Surface(modifier = Modifier.fillMaxSize()) {
-                            Text(text = "Welcome to Path Sathi!")
-                        }
-                    }
-                }
+                setContentView(R.layout.activity_main)
             }
         }
         EOF
 
-        # 7. App Vector Icon
+        # 7. activity_main.xml
+        cat << 'EOF' > app/src/main/res/layout/activity_main.xml
+        <?xml version="1.0" encoding="utf-8"?>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome to Path Sathi!"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#000000"/>
+        </RelativeLayout>
+        EOF
+
+        # 8. App Icon
         cat << 'EOF' > app/src/main/res/drawable/ic_launcher_foreground.xml
         <vector xmlns:android="http://schemas.android.com/apk/res/android"
             android:width="108dp"
