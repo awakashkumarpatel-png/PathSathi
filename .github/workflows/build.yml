@@ -142,7 +142,7 @@ jobs:
         }
         EOF
 
-        # 7. activity_main.xml (Rich Dashboard UI)
+        # 7. activity_main.xml (Fixed XML Ampersands)
         cat << 'EOF' > app/src/main/res/layout/activity_main.xml
         <?xml version="1.0" encoding="utf-8"?>
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -169,7 +169,7 @@ jobs:
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Your Smart Travel & Safety Companion"
+                    android:text="Your Smart Travel Companion"
                     android:textSize="14sp"
                     android:textColor="#64748B"
                     android:layout_marginBottom="20dp"/>
@@ -187,7 +187,7 @@ jobs:
                         android:id="@+id/etStart"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:hint="📍 Start Location (Current)"
+                        android:hint="Start Location"
                         android:padding="10dp"
                         android:layout_marginBottom="10dp"
                         android:background="#F1F5F9"/>
@@ -196,7 +196,7 @@ jobs:
                         android:id="@+id/etEnd"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:hint="🏁 Destination"
+                        android:hint="Destination"
                         android:padding="10dp"
                         android:layout_marginBottom="12dp"
                         android:background="#F1F5F9"/>
@@ -205,7 +205,7 @@ jobs:
                         android:id="@+id/btnSearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Search Routes & Transport"
+                        android:text="Search Routes and Transport"
                         android:background="#2563EB"
                         android:textColor="#FFFFFF"/>
                 </LinearLayout>
@@ -223,7 +223,7 @@ jobs:
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="🚌 Bus Timings & Stops"
+                    android:text="Bus Timings and Stops"
                     android:background="#059669"
                     android:textColor="#FFFFFF"
                     android:layout_marginBottom="10dp"/>
@@ -231,7 +231,7 @@ jobs:
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="🗺️ Live GPS Navigation"
+                    android:text="Live GPS Navigation"
                     android:background="#0284C7"
                     android:textColor="#FFFFFF"
                     android:layout_marginBottom="20dp"/>
@@ -247,7 +247,7 @@ jobs:
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Safety First 🛡️"
+                        android:text="Safety First"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#991B1B"
@@ -265,7 +265,7 @@ jobs:
                         android:id="@+id/btnSos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="🚨 EMERGENCY SOS"
+                        android:text="EMERGENCY SOS"
                         android:background="#DC2626"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"/>
