@@ -22,14 +22,12 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    - name: Auto-Fix Paths & Setup App Icon
+    - name: Create Clean Structure & App Icon
       run: |
-        echo "Organizing files and icons..."
         mkdir -p app/src/main/java/com/pathsathi/app
-        mkdir -p app/src/main/res/mipmap-hdpi
         mkdir -p app/src/main/res/drawable
 
-        # Auto-fix Manifest and Activity
+        # Auto-fix Manifest and Activity location
         MANIFEST_FILE=$(find app -name "AndroidManifest.xml" | head -n 1)
         if [ -n "$MANIFEST_FILE" ]; then
           cp "$MANIFEST_FILE" app/src/main/AndroidManifest.xml
@@ -40,15 +38,23 @@ jobs:
           cp "$ACTIVITY_FILE" app/src/main/java/com/pathsathi/app/MainActivity.kt
         fi
 
-        # Auto-detect uploaded logo image
-        LOGO_FILE=$(find . -maxdepth 3 \( -name "*logo*.png" -o -name "*icon*.png" -o -name "ic_launcher.png" -o -name "*.png" \) | grep -v "gradle" | head -n 1)
-        if [ -n "$LOGO_FILE" ]; then
-          echo "Found logo image at $LOGO_FILE, setting as App Icon..."
-          cp "$LOGO_FILE" app/src/main/res/mipmap-hdpi/ic_launcher.png
-          cp "$LOGO_FILE" app/src/main/res/drawable/ic_launcher.png
-        fi
+        # Generate Vector App Icon automatically
+        cat << 'EOF' > app/src/main/res/drawable/ic_launcher_foreground.xml
+        <vector xmlns:android="http://schemas.android.com/apk/res/android"
+            android:width="108dp"
+            android:height="108dp"
+            android:viewportWidth="108"
+            android:viewportHeight="108">
+            <path
+                android:fillColor="#00E5FF"
+                android:pathData="M54,18 L78,78 H30 L54,18 Z"/>
+            <path
+                android:fillColor="#00E676"
+                android:pathData="M54,34 L70,78 H38 L54,34 Z"/>
+        </vector>
+        EOF
 
-    - name: Generate Wrapper & Build APK
+    - name: Build Debug APK
       run: |
         gradle wrapper --gradle-version 8.4
         chmod +x gradlew
