@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Path Sathi</string>
+    <string name="tagline">आपकी यात्रा, हमारा साथ</string>
+
+    <string name="nav_home">होम</string>
+    <string name="nav_explore">एक्सप्लोर</string>
+    <string name="nav_trips">यात्राएँ</string>
+    <string name="nav_map">मानचित्र</string>
+    <string name="nav_sathi">साथी</string>
+
+    <string name="plan_my_trip">मेरी यात्रा बनाएं</string>
+    <string name="destination_hint">आप कहाँ जाना चाहते हैं?</string>
+    <string name="quick_budget">बजट</string>
+    <string name="quick_safety">सुरक्षा</string>
+    <string name="quick_explore">एक्सप्लोर</string>
+    <string name="quick_memory">यादें</string>
+
+    <string name="sathi_greeting">नमस्ते! मैं साथी रोबोट हूं, आपका यात्रा साथी। मैं आपकी कैसे मदद कर सकता हूं?</string>
+    <string name="sathi_input_hint">साथी से कुछ भी पूछें…</string>
+    <string name="sathi_listening">सुन रहा हूँ…</string>
+    <string name="sathi_offline_notice">साथी अभी ऑफ़लाइन काम कर रहा है। इंटरनेट आने तक कुछ जवाब सीमित हो सकते हैं।</string>
+
+    <string name="trip_destination">गंतव्य</string>
+    <string name="trip_days">दिनों की संख्या</string>
+    <string name="trip_budget">बजट</string>
+    <string name="trip_travelers">यात्री</string>
+    <string name="trip_type">यात्रा प्रकार</string>
+
+    <string name="safety_title">सुरक्षा एवं आपातकाल</string>
+    <string name="safety_sos">एसओएस</string>
+    <string name="emergency_contacts">आपातकालीन संपर्क</string>
+
+    <string name="budget_total">कुल बजट</string>
+    <string name="budget_spent">खर्च</string>
+    <string name="budget_remaining">शेष</string>
+
+    <string name="label_offline_data">ऑफ़लाइन / सहेजा गया डेटा</string>
+    <string name="label_demo_data">डेमो डेटा</string>
+    <string name="label_live_data">लाइव डेटा</string>
+    <string name="label_estimated">अनुमानित</string>
+</resources>
