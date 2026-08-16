@@ -1,17 +1,14 @@
 package com.pathsathi.app.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-// Path Sathi always ships in its signature dark + turquoise/green identity,
-// regardless of system theme, per the approved brand direction.
-private val PathSathiColorScheme = darkColorScheme(
+private val PathSathiColorScheme = lightColorScheme(
     primary = PsTurquoise,
-    onPrimary = PsBackground,
+    onPrimary = ColorWhite,
     secondary = PsGreen,
-    onSecondary = PsBackground,
+    onSecondary = ColorWhite,
     background = PsBackground,
     onBackground = PsTextPrimary,
     surface = PsSurface,
@@ -21,9 +18,11 @@ private val PathSathiColorScheme = darkColorScheme(
     error = PsDanger,
 )
 
+private val ColorWhite = androidx.compose.ui.graphics.Color(0xFFFFFFFF)
+
 @Composable
 fun PathSathiTheme(
-    useSystemDarkTheme: Boolean = isSystemInDarkTheme(),
+    useSystemDarkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
