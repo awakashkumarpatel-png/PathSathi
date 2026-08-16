@@ -3,6 +3,9 @@ package com.pathsathi.app.ui.theme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+
+private val ColorWhite = Color(0xFFFFFFFF)
 
 private val PathSathiColorScheme = lightColorScheme(
     primary = PsTurquoise,
@@ -17,8 +20,6 @@ private val PathSathiColorScheme = lightColorScheme(
     onSurfaceVariant = PsTextSecondary,
     error = PsDanger,
 )
-
-private val ColorWhite = androidx.compose.ui.graphics.Color(0xFFFFFFFF)
 
 @Composable
 fun PathSathiTheme(
