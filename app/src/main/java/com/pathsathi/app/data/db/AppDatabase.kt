@@ -16,7 +16,7 @@ import androidx.room.RoomDatabase
         SavedPlaceEntity::class
     ],
     version = 2,
-    exportSchema = true
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun tripDao(): TripDao
