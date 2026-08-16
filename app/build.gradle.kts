@@ -15,6 +15,10 @@ android {
         versionCode = 1
         versionName = "1.0.0"
 
+        buildConfigField("String", "AI_ENDPOINT", "\"\"")
+        buildConfigField("String", "AI_API_KEY", "\"\"")
+        buildConfigField("String", "AI_MODEL", "\"gpt-4o-mini\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }
@@ -40,6 +44,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {

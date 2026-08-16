@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.pathsathi.app.PathSathiApp
+import com.pathsathi.app.BuildConfig
+import com.pathsathi.app.ai.OpenAiCompatibleProvider
 import com.pathsathi.app.ai.AIOrchestrator
 import com.pathsathi.app.ai.NLRequest
 import com.pathsathi.app.ai.OfflineAIFallback
@@ -35,7 +37,9 @@ class SathiViewModel(app: Application) : AndroidViewModel(app) {
         offline = OfflineAIFallback(
             activeTripProvider = { repo.observeActiveTrip().first() ?: repo.observeTrips().first().firstOrNull() },
             spentProvider = { tripId -> repo.observeTotalSpent(tripId).first() }
-        )
+        ),
+        online = OpenAiCompatibleProvider(BuildConfig.AI_ENDPOINT, BuildConfig.AI_API_KEY, BuildConfig.AI_MODEL)
+            .takeIf { it.isLive() }
     )
 
     private val _isHindi = MutableStateFlow(false)

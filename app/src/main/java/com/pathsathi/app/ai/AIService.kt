@@ -119,3 +119,36 @@ class AIOrchestrator(
 
     override fun isLive(): Boolean = online?.isLive() ?: false
 }
+
+
+/** Optional OpenAI-compatible REST provider. Configure endpoint/key outside source; offline fallback remains automatic. */
+class OpenAiCompatibleProvider(
+    private val endpoint: String,
+    private val apiKey: String,
+    private val model: String = "gpt-4o-mini"
+) : OnlineAIProvider {
+    override fun isLive(): Boolean = endpoint.isNotBlank() && apiKey.isNotBlank()
+
+    override suspend fun converse(request: NLRequest, tripContext: TripContext): AIResponse = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+        if (!isLive()) throw IllegalStateException("Online AI is not configured")
+        val context = "destination=${tripContext.destination}, day=${tripContext.dayNumber}/${tripContext.totalDays}, budget=${tripContext.budgetInr}, spent=${tripContext.spentInr}"
+        val body = org.json.JSONObject().apply {
+            put("model", model)
+            put("messages", org.json.JSONArray().put(org.json.JSONObject().put("role", "system").put("content", "You are Sathi Robot, a safe travel assistant. Never invent emergency contacts or live facts. Trip context: $context")).put(org.json.JSONObject().put("role", "user").put("content", request.text)))
+        }
+        val conn = (java.net.URL(endpoint).openConnection() as java.net.HttpURLConnection).apply {
+            requestMethod = "POST"; connectTimeout = 15000; readTimeout = 30000; doOutput = true
+            setRequestProperty("Authorization", "Bearer $apiKey"); setRequestProperty("Content-Type", "application/json")
+        }
+        conn.outputStream.use { it.write(body.toString().toByteArray(Charsets.UTF_8)) }
+        if (conn.responseCode !in 200..299) throw IllegalStateException("AI HTTP ${conn.responseCode}")
+        val json = conn.inputStream.bufferedReader().use { it.readText() }
+        conn.disconnect()
+        val text = org.json.JSONObject(json).optJSONArray("choices")?.optJSONObject(0)?.optJSONObject("message")?.optString("content").orEmpty()
+        if (text.isBlank()) throw IllegalStateException("Empty AI response")
+        AIResponse(text = text, fromOnlineAI = true)
+    }
+
+    override suspend fun personalizedRecommendations(tripContext: TripContext, userContext: UserContext): List<Recommendation> = emptyList()
+    override suspend fun suggestItineraryChange(tripContext: TripContext): ItineraryChangeSuggestion? = null
+}

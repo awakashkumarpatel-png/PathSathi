@@ -16,6 +16,7 @@ import com.pathsathi.app.map.GeoPoint
 import com.pathsathi.app.map.MapPlace
 import com.pathsathi.app.map.MapProviderFactory
 import com.pathsathi.app.map.OfflineMapProvider
+import com.pathsathi.app.map.OnlineOsmMapProvider
 import com.pathsathi.app.map.TravelMode
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -47,7 +48,8 @@ class MapViewModel(app: Application) : AndroidViewModel(app) {
                     else MapPlace(p.id.toString(), p.name, GeoPoint(p.lat, p.lng), p.category, true)
                 }
             }
-        )
+        ),
+        online = OnlineOsmMapProvider()
     )
 
     init {
