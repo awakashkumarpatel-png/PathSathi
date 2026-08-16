@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.PathSathi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.PathSathi" parent="android:style/Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/ps_background</item>
         <item name="android:navigationBarColor">@color/ps_background</item>
         <item name="android:windowBackground">@color/ps_background</item>
