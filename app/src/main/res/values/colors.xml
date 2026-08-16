@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ps_background">#0D1414</color>
+    <color name="ps_surface">#141E1E</color>
+    <color name="ps_surface_alt">#1B2828</color>
+    <color name="ps_turquoise">#1FD1B6</color>
+    <color name="ps_green">#4CD97B</color>
+    <color name="ps_turquoise_dark">#0FA894</color>
+    <color name="ps_text_primary">#EAF6F4</color>
+    <color name="ps_text_secondary">#9FB4B1</color>
+    <color name="ps_danger">#FF5A5A</color>
+    <color name="ps_warning">#FFC24B</color>
+</resources>

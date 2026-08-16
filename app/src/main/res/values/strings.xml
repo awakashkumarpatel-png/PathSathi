@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Path Sathi</string>
+    <string name="tagline">Your Journey, Our Companion</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_trips">Trips</string>
+    <string name="nav_map">Map</string>
+    <string name="nav_sathi">Sathi</string>
+
+    <!-- Home -->
+    <string name="plan_my_trip">PLAN MY TRIP</string>
+    <string name="destination_hint">Where do you want to go?</string>
+    <string name="quick_budget">Budget</string>
+    <string name="quick_safety">Safety</string>
+    <string name="quick_explore">Explore</string>
+    <string name="quick_memory">Memory</string>
+
+    <!-- Sathi Robot -->
+    <string name="sathi_greeting">Namaste! I am Sathi Robot, your travel companion. How can I help you today?</string>
+    <string name="sathi_input_hint">Ask Sathi anything…</string>
+    <string name="sathi_listening">Listening…</string>
+    <string name="sathi_offline_notice">Sathi is working offline right now. Some smart answers may be limited until you\'re online.</string>
+
+    <!-- Trip Planner -->
+    <string name="trip_destination">Destination</string>
+    <string name="trip_days">Number of days</string>
+    <string name="trip_budget">Budget</string>
+    <string name="trip_travelers">Travelers</string>
+    <string name="trip_type">Trip type</string>
+
+    <!-- Safety -->
+    <string name="safety_title">Safety &amp; Emergency</string>
+    <string name="safety_sos">SOS</string>
+    <string name="emergency_contacts">Emergency Contacts</string>
+
+    <!-- Budget -->
+    <string name="budget_total">Total Budget</string>
+    <string name="budget_spent">Spent</string>
+    <string name="budget_remaining">Remaining</string>
+
+    <!-- Data source labels (never fabricate live data) -->
+    <string name="label_offline_data">Offline / Saved Data</string>
+    <string name="label_demo_data">Demo Data</string>
+    <string name="label_live_data">Live Data</string>
+    <string name="label_estimated">Estimated</string>
+</resources>
