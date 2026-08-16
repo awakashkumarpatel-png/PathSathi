@@ -3,6 +3,7 @@ package com.pathsathi.app.ui.navigation
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import android.net.Uri
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -40,9 +41,9 @@ fun PathSathiNavGraph() {
             composable(NavRoutes.HOME) {
                 HomeScreen(
                     onPlanTrip = { dest ->
-                        navController.navigate("${NavRoutes.PLANNER}?destination=$dest")
+                        navController.navigate("${NavRoutes.PLANNER}?destination=${Uri.encode(dest)}")
                     },
-                    onOpenBudget = { navController.navigate(NavRoutes.TRIPS) },
+                    onOpenBudget = { navController.navigate(NavRoutes.BUDGET_HOME) },
                     onOpenSafety = { navController.navigate(NavRoutes.SAFETY) },
                     onOpenExplore = { navController.navigate(NavRoutes.EXPLORE) },
                     onOpenMemory = { navController.navigate(NavRoutes.MEMORY) },
@@ -94,6 +95,7 @@ fun PathSathiNavGraph() {
                 )
             }
 
+            composable(NavRoutes.BUDGET_HOME) { BudgetScreen(tripId = null) }
             composable(
                 route = NavRoutes.BUDGET,
                 arguments = listOf(navArgument("tripId") { type = NavType.LongType })

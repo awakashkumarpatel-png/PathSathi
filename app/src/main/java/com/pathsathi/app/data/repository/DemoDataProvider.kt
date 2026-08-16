@@ -70,12 +70,8 @@ object DemoDataProvider {
 
     fun emergencyInfo(destination: String): List<EmergencyInfo> = listOf(
         EmergencyInfo("em1", "helpline", "National Emergency Number", "112",
-            "Works across India for police/fire/medical emergencies.", DataSource.OFFLINE_SAVED),
-        EmergencyInfo("em2", "helpline", "Tourist Helpline", "1363",
-            "24x7 multilingual tourist assistance helpline (India).", DataSource.OFFLINE_SAVED),
-        EmergencyInfo("em3", "hospital", "$destination Nearest Hospital (sample)", "N/A",
-            "Add the real local hospital contact once you arrive — this is a placeholder.", DataSource.DEMO),
-        EmergencyInfo("em4", "police", "$destination Police Station (sample)", "N/A",
-            "Add the real local police contact once you arrive — this is a placeholder.", DataSource.DEMO),
+            "India-wide emergency assistance for police, fire and medical emergencies.", DataSource.OFFLINE_SAVED),
+        EmergencyInfo("em2", "local", "Local emergency assistance", "112",
+            "Path Sathi does not invent local hospital or police numbers. Use 112 for urgent assistance in $destination.", DataSource.OFFLINE_SAVED),
     )
 }

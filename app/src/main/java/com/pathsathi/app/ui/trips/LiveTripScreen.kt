@@ -1,94 +1,16 @@
 package com.pathsathi.app.ui.trips
-
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.pathsathi.app.data.db.TripEntity
 import com.pathsathi.app.engine.ItinerarySerializer
 import com.pathsathi.app.ui.theme.PsSurfaceAlt
-
-@Composable
-fun LiveTripScreen(
-    tripId: Long,
-    onOpenBudget: () -> Unit = {},
-    onOpenMemory: () -> Unit = {},
-    vm: TripsViewModel = viewModel()
-) {
-    val trips by vm.trips.collectAsState()
-    val guidance by vm.guidance.collectAsState()
-    val trip = trips.firstOrNull { it.id == tripId }
-
-    LaunchedEffect(trip?.currentDayIndex, trip?.id) {
-        trip?.let { vm.refreshGuidance(it) }
-    }
-
-    if (trip == null) {
-        Column(Modifier.fillMaxSize().padding(20.dp)) {
-            Text("Loading trip…", style = MaterialTheme.typography.bodyLarge)
-        }
-        return
-    }
-
-    val days = ItinerarySerializer.decode(trip.itineraryJson)
-    val dayIdx = trip.currentDayIndex.coerceIn(0, (days.size - 1).coerceAtLeast(0))
-    val today = days.getOrNull(dayIdx)
-
-    Column(
-        modifier = Modifier.fillMaxSize().padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp)
-    ) {
-        Text(trip.destination, style = MaterialTheme.typography.headlineMedium)
-        Text("Status: ${trip.status}", style = MaterialTheme.typography.bodyMedium)
-
-        Card(colors = CardDefaults.cardColors(containerColor = PsSurfaceAlt), modifier = Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text("Sathi Robot guidance", style = MaterialTheme.typography.titleMedium)
-                Text(guidance.ifBlank { "Tap refresh to get today's guidance." }, style = MaterialTheme.typography.bodyMedium)
-            }
-        }
-
-        today?.let { d ->
-            Card(modifier = Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text("Day ${d.dayNumber} plan", style = MaterialTheme.typography.titleMedium)
-                    Text("Route: ${d.travelSequence}", style = MaterialTheme.typography.bodyMedium)
-                    Text("Transport: ${d.transportation}", style = MaterialTheme.typography.bodyMedium)
-                    Text("Stay: ${d.stayInfo}", style = MaterialTheme.typography.bodyMedium)
-                    Text("Estimated cost: ₹${d.estimatedCostInr}", style = MaterialTheme.typography.bodyMedium)
-                    Text("Rest time: ${d.restTimeMinutes} min", style = MaterialTheme.typography.bodyMedium)
-                }
-            }
-        }
-
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            if (trip.status == "PLANNED") {
-                Button(onClick = { vm.startTrip(trip) }) { Text("Start Trip") }
-            }
-            if (trip.status == "ACTIVE") {
-                OutlinedButton(onClick = { vm.advanceDay(trip) }) { Text("Next Day") }
-                Button(onClick = { vm.completeTrip(trip) }) { Text("Complete Trip") }
-            }
-            OutlinedButton(onClick = { vm.refreshGuidance(trip) }) { Text("Refresh Guidance") }
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            OutlinedButton(onClick = onOpenBudget) { Text("Open Budget") }
-            OutlinedButton(onClick = onOpenMemory) { Text("Add Memory") }
-        }
-    }
-}
+@Composable fun LiveTripScreen(tripId:Long,onOpenBudget:()->Unit={},onOpenMemory:()->Unit={},vm:TripsViewModel=viewModel()){val c=LocalContext.current;val trips by vm.trips.collectAsState();val g by vm.guidance.collectAsState();val dist by vm.distanceKm.collectAsState();val eta by vm.etaMinutes.collectAsState();val tracking by vm.tracking.collectAsState();val t=trips.firstOrNull{it.id==tripId};val launcher=rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){r->if(r[Manifest.permission.ACCESS_FINE_LOCATION]==true||r[Manifest.permission.ACCESS_COARSE_LOCATION]==true)t?.let{vm.startAutoTracking(c,it)}};DisposableEffect(t?.id,t?.status){if(t?.status=="ACTIVE"){val ok=ContextCompat.checkSelfPermission(c,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(c,Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED;if(ok)vm.startAutoTracking(c,t)else launcher.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION))};onDispose{vm.stopAutoTracking()}};LaunchedEffect(t?.id,t?.currentDayIndex){t?.let(vm::refreshGuidance)};if(t==null){Column(Modifier.fillMaxSize().padding(20.dp)){Text("Loading trip…")};return};val ds=ItinerarySerializer.decode(t.itineraryJson);val idx=t.currentDayIndex.coerceIn(0,(ds.size-1).coerceAtLeast(0));val day=ds.getOrNull(idx);Column(Modifier.fillMaxSize().padding(20.dp),verticalArrangement=Arrangement.spacedBy(14.dp)){Text(t.destination,style=MaterialTheme.typography.headlineMedium);Text("Status: ${t.status}");Card(colors=CardDefaults.cardColors(containerColor=PsSurfaceAlt),modifier=Modifier.fillMaxWidth()){Column(Modifier.padding(14.dp),verticalArrangement=Arrangement.spacedBy(6.dp)){Text("Sathi Auto Mode",style=MaterialTheme.typography.titleMedium);Text(if(tracking)"Automatic GPS tracking is active."else"Automatic GPS tracking is not active.");Text(g.ifBlank{"Start the trip and allow location permission for live guidance."});if(dist!=null)Text("Next stop: %.1f km · ETA %d min".format(dist,eta?:0))}};day?.let{d->Card(Modifier.fillMaxWidth()){Column(Modifier.padding(14.dp)){Text("Day ${d.dayNumber} plan",style=MaterialTheme.typography.titleMedium);Text("Route: ${d.travelSequence}");Text("Transport: ${d.transportation}");Text("Food: ${d.foodStops.joinToString()}");Text("Stay: ${d.stayInfo}");Text("Estimated cost: ₹${d.estimatedCostInr}")}}};Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){if(t.status=="PLANNED")Button({vm.startTrip(t)}){Text("Start Trip")};if(t.status=="ACTIVE"){OutlinedButton({vm.advanceDay(t)}){Text("Next Day")};Button({vm.completeTrip(t)}){Text("Complete Trip")}};OutlinedButton({vm.refreshGuidance(t)}){Text("Refresh")}};Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){OutlinedButton(onClick=onOpenBudget){Text("Open Budget")};OutlinedButton(onClick=onOpenMemory){Text("Add Memory")}}}}

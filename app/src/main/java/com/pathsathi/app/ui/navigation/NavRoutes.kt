@@ -12,6 +12,7 @@ object NavRoutes {
     fun liveTrip(tripId: Long) = "live_trip/$tripId"
 
     const val BUDGET = "budget/{tripId}"
+    const val BUDGET_HOME = "budget"
     fun budget(tripId: Long) = "budget/$tripId"
 
     const val STAY = "stay"

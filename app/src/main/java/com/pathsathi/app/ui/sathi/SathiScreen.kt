@@ -1,5 +1,11 @@
 package com.pathsathi.app.ui.sathi
 
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -42,6 +48,9 @@ fun SathiScreen(vm: SathiViewModel = viewModel()) {
     val isHindi by vm.isHindi.collectAsState()
     val onlineAiRequestedAndReachable by vm.onlineAiRequestedAndReachable.collectAsState()
     var input by remember { mutableStateOf("") }
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val listening by vm.isListening.collectAsState()
+    val micLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { if (it) vm.startVoiceListening() }
 
     Scaffold(
         topBar = {
@@ -110,9 +119,10 @@ fun SathiScreen(vm: SathiViewModel = viewModel()) {
                     placeholder = { Text(stringResource(R.string.sathi_input_hint)) }
                 )
                 IconButton(onClick = {
-                    if (vm.voiceEngine.isDeviceRecognitionAvailable()) vm.setListening(true)
+                    if (!vm.voiceEngine.isDeviceRecognitionAvailable()) return@IconButton
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) vm.startVoiceListening() else micLauncher.launch(Manifest.permission.RECORD_AUDIO)
                 }) {
-                    Icon(Icons.Filled.Mic, contentDescription = stringResource(R.string.sathi_listening))
+                    Icon(Icons.Filled.Mic, contentDescription = if(listening) stringResource(R.string.sathi_listening) else "Voice input", tint = if(listening) PsGreen else MaterialTheme.colorScheme.onSurface)
                 }
                 IconButton(onClick = {
                     vm.sendMessage(input)

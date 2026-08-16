@@ -16,7 +16,7 @@ private val Context.configDataStore by preferencesDataStore(name = "pathsathi_co
  * default is offline-safe, and every online capability stays off until the
  * person explicitly enables it (and a real provider/key is wired in).
  *
- * ⚠️ WEBSITE_URL_PLACEHOLDER is intentionally NOT a real domain. Path Sathi
+ * ⚠️ DEFAULT_WEBSITE_URL is intentionally NOT a real domain. Path Sathi
  * does not have an official domain yet. Replace this one constant with the
  * real URL once it exists — nothing else in the app needs to change, since
  * every screen that wants to show a website/support/privacy-policy link
@@ -24,17 +24,13 @@ private val Context.configDataStore by preferencesDataStore(name = "pathsathi_co
  */
 object AppConfig {
 
-    /**
-     * Clearly-marked placeholder. Intentionally invalid as a real URL (the
-     * "CONFIGURE-ME" segment) so it can never be mistaken for a live link if
-     * this constant is ever surfaced before someone fills in the real one.
-     */
-    const val WEBSITE_URL_PLACEHOLDER = "https://CONFIGURE-ME.pathsathi.example/"
-    const val PRIVACY_POLICY_URL_PLACEHOLDER = "https://CONFIGURE-ME.pathsathi.example/privacy"
-    const val SUPPORT_URL_PLACEHOLDER = "https://CONFIGURE-ME.pathsathi.example/support"
+    /** Default public project address used until the user configures a dedicated website. */
+    const val DEFAULT_WEBSITE_URL = "https://github.com/awakashkumarpatel-png/PathSathi"
+    const val PRIVACY_POLICY_URL = "https://github.com/awakashkumarpatel-png/PathSathi/blob/main/README.md"
+    const val SUPPORT_URL = "https://github.com/awakashkumarpatel-png/PathSathi/issues"
 
-    /** True only when WEBSITE_URL_PLACEHOLDER has been replaced with a real URL. Used to hide/disable web-link UI until then. */
-    fun isWebsiteConfigured(url: String): Boolean = url.isNotBlank() && !url.contains("CONFIGURE-ME")
+    /** Validates that the stored value can be opened as a web URL. */
+    fun isWebsiteConfigured(url: String): Boolean = url.startsWith("https://") || url.startsWith("http://")
 
     private val KEY_ONLINE_FEATURES_ENABLED = booleanPreferencesKey("online_features_enabled")
     private val KEY_ONLINE_AI_ENABLED = booleanPreferencesKey("online_ai_enabled")
@@ -65,9 +61,9 @@ object AppConfig {
         context.configDataStore.edit { it[KEY_ADS_ENABLED] = enabled }
     }
 
-    /** Falls back to the clearly-marked placeholder until a real URL is stored. */
+    /** Falls back to the public Path Sathi project page until a custom URL is stored. */
     fun websiteUrl(context: Context): Flow<String> =
-        context.configDataStore.data.map { it[KEY_WEBSITE_URL] ?: WEBSITE_URL_PLACEHOLDER }
+        context.configDataStore.data.map { it[KEY_WEBSITE_URL] ?: DEFAULT_WEBSITE_URL }
 
     suspend fun setWebsiteUrl(context: Context, url: String) {
         context.configDataStore.edit { it[KEY_WEBSITE_URL] = url }

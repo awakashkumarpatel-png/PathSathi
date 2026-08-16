@@ -11,6 +11,7 @@ import com.pathsathi.app.ai.TripContext
 import com.pathsathi.app.core.AppConfig
 import com.pathsathi.app.core.ConnectivityObserver
 import com.pathsathi.app.data.db.ChatMessageEntity
+import com.pathsathi.app.engine.ItinerarySerializer
 import com.pathsathi.app.voice.VoiceEngine
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -60,6 +61,7 @@ class SathiViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun setListening(listening: Boolean) { _isListening.value = listening }
+    fun startVoiceListening(){_isListening.value=true;voiceEngine.startListening(_isHindi.value,{sendMessage(it)}){_isListening.value=false}}
 
     fun sendMessage(text: String) {
         if (text.isBlank()) return
@@ -76,7 +78,7 @@ class SathiViewModel(app: Application) : AndroidViewModel(app) {
                 budgetInr = activeTrip?.budgetInr,
                 spentInr = spent,
                 tripType = activeTrip?.tripType,
-                nextDestinationName = activeTrip?.destination
+                nextDestinationName = activeTrip?.let { ItinerarySerializer.decode(it.itineraryJson).getOrNull(it.currentDayIndex.coerceAtLeast(0))?.places?.firstOrNull() ?: it.destination }
             )
             val response = aiService.converse(NLRequest(text, _isHindi.value), context)
 

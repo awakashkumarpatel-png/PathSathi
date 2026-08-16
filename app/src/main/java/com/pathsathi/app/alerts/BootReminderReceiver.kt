@@ -1,20 +1,9 @@
 package com.pathsathi.app.alerts
-
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-
-/**
- * On boot, this is where any persisted (Room-backed) upcoming reminders would be
- * re-enqueued with WorkManager, since one-time WorkRequests are cleared on reboot
- * on some OEMs. Kept minimal for now: ensures the notification channel exists.
- */
-class BootReminderReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action == Intent.ACTION_BOOT_COMPLETED) {
-            AlertScheduler.ensureChannel(context)
-            // Future: query Room for trips with status ACTIVE/PLANNED and re-schedule
-            // their upcoming departure/budget reminders here.
-        }
-    }
-}
+import android.content.*
+import androidx.work.*
+import com.pathsathi.app.PathSathiApp
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import java.util.concurrent.TimeUnit
+class BootReminderReceiver:BroadcastReceiver(){override fun onReceive(c:Context,i:Intent){if(i.action!=Intent.ACTION_BOOT_COMPLETED)return;AlertScheduler.ensureChannel(c);WorkManager.getInstance(c).enqueue(OneTimeWorkRequestBuilder<BootCheckWorker>().setInitialDelay(2,TimeUnit.MINUTES).build())}}
+class BootCheckWorker(app:Context,p:WorkerParameters):Worker(app,p){override fun doWork():Result{val a=applicationContext as? PathSathiApp?:return Result.success();runBlocking{a.repository.observeActiveTrip().first()?.let{AlertScheduler.scheduleReminder(applicationContext,"Path Sathi","Your active trip to ${it.destination} is ready.",1)}};return Result.success()}}

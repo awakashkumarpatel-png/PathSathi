@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.pathsathi.app.core.AppConfig
+import com.pathsathi.app.core.LanguageManager
+import com.pathsathi.app.core.findActivity
 import com.pathsathi.app.core.ConnectivityObserver
 import com.pathsathi.app.online.CloudSyncOrchestrator
 import com.pathsathi.app.online.SyncResult
@@ -49,13 +51,13 @@ fun SettingsScreen() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    var selectedLang by remember { mutableStateOf("English") }
-    val languages = listOf("English", "Hindi")
+    val selectedCode = LanguageManager.getLanguage(context)
+    val languages = listOf("English" to "en", "Hindi" to "hi")
 
     val onlineFeaturesEnabled by AppConfig.onlineFeaturesEnabled(context).collectAsState(initial = false)
     val onlineAiEnabled by AppConfig.onlineAiEnabled(context).collectAsState(initial = false)
     val adsEnabled by AppConfig.adsEnabled(context).collectAsState(initial = false)
-    val websiteUrl by AppConfig.websiteUrl(context).collectAsState(initial = AppConfig.WEBSITE_URL_PLACEHOLDER)
+    val websiteUrl by AppConfig.websiteUrl(context).collectAsState(initial = AppConfig.DEFAULT_WEBSITE_URL)
     var websiteUrlDraft by remember(websiteUrl) { mutableStateOf(websiteUrl) }
 
     val isOnline by ConnectivityObserver.isOnline(context).collectAsState(initial = false)
@@ -70,10 +72,10 @@ fun SettingsScreen() {
         item {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("App language", style = MaterialTheme.typography.titleMedium)
-                languages.forEach { lang ->
+                languages.forEach { (label, code) ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        RadioButton(selected = selectedLang == lang, onClick = { selectedLang = lang })
-                        Text(lang, style = MaterialTheme.typography.bodyLarge)
+                        RadioButton(selected = selectedCode == code, onClick = { LanguageManager.setLanguage(context, code); context.findActivity()?.recreate() })
+                        Text(label, style = MaterialTheme.typography.bodyLarge)
                     }
                 }
             }
@@ -138,7 +140,7 @@ fun SettingsScreen() {
                     Text("Web presence", style = MaterialTheme.typography.titleMedium)
                     val configured = AppConfig.isWebsiteConfigured(websiteUrl)
                     Text(
-                        if (configured) "Official website configured." else "No official Path Sathi website is set up yet — the field below is a placeholder, not a real link.",
+                        if (configured) "Official website configured." else "Using the configured Path Sathi web address.",
                         style = MaterialTheme.typography.labelSmall
                     )
                     OutlinedTextField(
