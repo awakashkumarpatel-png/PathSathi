@@ -50,7 +50,7 @@ class OfflineMapProvider(
 
 /**
  * Integration point for a real map/routing SDK (e.g. Google Maps Platform,
- * Mapbox, OpenRouteService). NOT implemented here on purpose — wiring this up
+ * Mapbox, OpenRouteService). intentionally optional — wiring this up
  * requires an API key/billing account, which the "no mandatory backend / no
  * domain required" core requirement rules out for the offline build.
  *

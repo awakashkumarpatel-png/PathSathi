@@ -12,6 +12,7 @@ import com.pathsathi.app.core.AppConfig
 import com.pathsathi.app.core.ConnectivityObserver
 import com.pathsathi.app.data.db.ChatMessageEntity
 import com.pathsathi.app.engine.ItinerarySerializer
+import com.pathsathi.app.engine.SathiEngine
 import com.pathsathi.app.voice.VoiceEngine
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,7 +33,7 @@ class SathiViewModel(app: Application) : AndroidViewModel(app) {
     // real provider exists, and is surfaced here so the UI can be honest about it.
     private val aiService = AIOrchestrator(
         offline = OfflineAIFallback(
-            activeTripProvider = { repo.observeActiveTrip().first() },
+            activeTripProvider = { repo.observeActiveTrip().first() ?: repo.observeTrips().first().firstOrNull() },
             spentProvider = { tripId -> repo.observeTotalSpent(tripId).first() }
         )
     )
@@ -68,7 +69,28 @@ class SathiViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             repo.addChatMessage(ChatMessageEntity(fromUser = true, text = text, timestampEpochMs = System.currentTimeMillis()))
 
-            val activeTrip = repo.observeActiveTrip().first()
+            val activeTrip = repo.observeActiveTrip().first() ?: repo.observeTrips().first().firstOrNull()
+            val expenseCommand = SathiEngine.parseExpenseCommand(text)
+            if (activeTrip != null && expenseCommand != null) {
+                repo.addExpense(
+                    com.pathsathi.app.data.db.BudgetExpenseEntity(
+                        tripId = activeTrip.id,
+                        category = expenseCommand.category,
+                        amountInr = expenseCommand.amountInr,
+                        note = expenseCommand.note,
+                        dateEpochMs = System.currentTimeMillis(),
+                        travelerId = null
+                    )
+                )
+                val confirmation = if (_isHindi.value) {
+                    "₹${expenseCommand.amountInr} का ${expenseCommand.category} खर्च दर्ज कर दिया है${if (expenseCommand.note.isNotBlank()) " — ${expenseCommand.note}" else ""}."
+                } else {
+                    "Added ₹${expenseCommand.amountInr} ${expenseCommand.category} expense${if (expenseCommand.note.isNotBlank()) " — ${expenseCommand.note}" else ""}."
+                }
+                repo.addChatMessage(ChatMessageEntity(fromUser = false, text = confirmation, timestampEpochMs = System.currentTimeMillis()))
+                voiceEngine.speak(confirmation)
+                return@launch
+            }
             val spent = if (activeTrip != null) repo.observeTotalSpent(activeTrip.id).first() else 0
             val context = TripContext(
                 tripId = activeTrip?.id,

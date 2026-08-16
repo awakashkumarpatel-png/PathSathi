@@ -210,3 +210,13 @@ PathSathi/
 4. Grant location/microphone/notification permissions when prompted for
    Map, Sathi voice input, and Alerts — the app stays usable with reduced
    functionality if any are denied.
+
+## Final core functionality additions in this source
+
+- Smart Budget now includes today / this-week / this-month totals and keeps category totals.
+- Shared group expenses can be recorded without assigning a payer; individual expenses can still be assigned to a traveler.
+- Sathi Robot can record a simple offline expense command such as `add expense 500 food lunch` or `खर्च 500 food lunch`, then confirms it by text and natural TTS.
+- Sathi can use the latest planned trip as context before a trip becomes ACTIVE, while ACTIVE trips still take priority.
+- The existing offline itinerary, Preview, Live Trip GPS/ETA, Safety, Memory, Map, Explore, Stay, Food, Transport, language, alerts, ads-gating, online-gating, and optional-provider architecture remains in place.
+
+Optional live services (real cloud sync, live weather, live transport feeds, real booking, real online AI, and a real ad network) still require their respective provider/API configuration; the offline core does not depend on them.

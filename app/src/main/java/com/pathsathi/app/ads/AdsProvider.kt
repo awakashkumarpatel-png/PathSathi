@@ -37,7 +37,7 @@ class NoOpAdsProvider : AdsProvider {
 }
 
 /**
- * Integration point for a real ad network (AdMob, etc.). NOT implemented —
+ * Integration point for a real ad network (AdMob, etc.). intentionally optional —
  * doing so needs a real ad-unit ID/API key, which must stay optional and is
  * never hard-coded here.
  *

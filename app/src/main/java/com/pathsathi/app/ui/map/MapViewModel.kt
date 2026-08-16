@@ -101,6 +101,6 @@ class MapViewModel(app: Application) : AndroidViewModel(app) {
     fun saveCurrentAsPlace(name: String, category: String) {
         val loc = _currentLocation.value ?: return
         if (name.isBlank()) return
-        viewModelScope.launch { repo.savePlace(SavedPlaceEntity(name.trim(), category, loc.lat, loc.lng, "Saved from current GPS location")) }
+        viewModelScope.launch { repo.savePlace(SavedPlaceEntity(name = name.trim(), category = category, lat = loc.lat, lng = loc.lng, note = "Saved from current GPS location")) }
     }
 }

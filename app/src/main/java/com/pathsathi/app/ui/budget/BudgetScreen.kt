@@ -1,76 +1,93 @@
 package com.pathsathi.app.ui.budget
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.weight
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pathsathi.app.data.db.TravelerEntity
 import com.pathsathi.app.ui.theme.PsSurfaceAlt
+import java.util.Calendar
 
 private val CATEGORIES = listOf("Travel", "Stay", "Food", "Tickets", "Activities", "Shopping", "Other")
 
 @Composable
 fun BudgetScreen(tripId: Long?, vm: BudgetViewModel = viewModel()) {
     LaunchedEffect(tripId) { if (tripId != null) vm.load(tripId) else vm.loadActive() }
+
     val trip by vm.trip.collectAsState()
     val expenses by vm.expenses.collectAsState()
     val spent by vm.spent.collectAsState()
     val travelers by vm.travelers.collectAsState()
+
     var amount by remember { mutableStateOf("") }
     var note by remember { mutableStateOf("") }
     var category by remember { mutableStateOf(CATEGORIES.first()) }
     var payer by remember { mutableStateOf<TravelerEntity?>(null) }
     var categoryOpen by remember { mutableStateOf(false) }
     var payerOpen by remember { mutableStateOf(false) }
-    val id = trip?.id
-    if (id == null) {
-        Column(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    var travelerName by remember { mutableStateOf("") }
+
+    val currentTrip = trip
+    if (currentTrip == null) {
+        return Column(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("Smart Budget", style = MaterialTheme.typography.headlineMedium)
             Text("Create a trip first.")
         }
-        return
     }
-    val sharedTotal = expenses.filter { it.travelerId == null }.sumOf { it.amountInr }
-    val sharedShare = if (travelers.isNotEmpty()) sharedTotal.toDouble() / travelers.size else 0.0
+
+    val remaining = currentTrip.budgetInr - spent
+    val now = Calendar.getInstance()
+    val todayStart = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+    }.timeInMillis
+    val weekStart = Calendar.getInstance().apply {
+        set(Calendar.DAY_OF_WEEK, firstDayOfWeek); set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+    }.timeInMillis
+    val monthStart = Calendar.getInstance().apply {
+        set(Calendar.DAY_OF_MONTH, 1); set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
+    }.timeInMillis
+    val today = expenses.filter { it.dateEpochMs >= todayStart }.sumOf { it.amountInr }
+    val week = expenses.filter { it.dateEpochMs >= weekStart }.sumOf { it.amountInr }
+    val month = expenses.filter { it.dateEpochMs >= monthStart }.sumOf { it.amountInr }
+    val categoryTotals = expenses.groupBy { it.category }.mapValues { (_, xs) -> xs.sumOf { it.amountInr } }.toList().sortedByDescending { it.second }
+
     LazyColumn(Modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         item {
             Text("Smart Budget", style = MaterialTheme.typography.headlineMedium)
             Card(colors = CardDefaults.cardColors(containerColor = PsSurfaceAlt), modifier = Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(14.dp)) {
-                    Text("Total: ₹${trip?.budgetInr}")
+                Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text("Budget: ₹${currentTrip.budgetInr}")
                     Text("Spent: ₹$spent")
-                    Text("Remaining: ₹${(trip?.budgetInr ?: 0) - spent}")
+                    Text("Remaining: ₹$remaining")
+                    if (remaining < 0) Text("Budget exceeded by ₹${-remaining}", color = MaterialTheme.colorScheme.error)
                 }
             }
         }
         item {
-            OutlinedTextField(amount, { amount = it.filter(Char::isDigit) }, label = { Text("Amount (₹)") }, keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+            Text("Expense breakdown", style = MaterialTheme.typography.titleMedium)
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text("Today: ₹$today")
+                    Text("This week: ₹$week")
+                    Text("This month: ₹$month")
+                }
+            }
+        }
+        item { Text("By category", style = MaterialTheme.typography.titleMedium) }
+        items(categoryTotals) { (cat, total) -> Text("$cat · ₹$total") }
+
+        item {
+            OutlinedTextField(
+                amount,
+                { amount = it.filter(Char::isDigit) },
+                label = { Text("Amount (₹)") },
+                keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number),
+                modifier = Modifier.fillMaxWidth()
+            )
         }
         item { OutlinedTextField(note, { note = it }, label = { Text("Note") }, modifier = Modifier.fillMaxWidth()) }
         item {
@@ -82,44 +99,64 @@ fun BudgetScreen(tripId: Long?, vm: BudgetViewModel = viewModel()) {
                     }
                 }
                 Box {
-                    OutlinedButton(onClick = { payerOpen = true }) { Text(payer?.name ?: travelers.firstOrNull()?.name ?: "Select payer") }
+                    OutlinedButton(onClick = { payerOpen = true }) { Text(payer?.name ?: "Shared expense") }
                     DropdownMenu(payerOpen, { payerOpen = false }) {
+                        DropdownMenuItem(text = { Text("Shared expense") }, onClick = { payer = null; payerOpen = false })
                         travelers.forEach { t -> DropdownMenuItem(text = { Text(t.name) }, onClick = { payer = t; payerOpen = false }) }
                     }
                 }
             }
         }
         item {
-            Button(onClick = { vm.addExpense(id, category, amount.toIntOrNull() ?: 0, note, (payer ?: travelers.firstOrNull())?.id); amount = ""; note = "" }, modifier = Modifier.fillMaxWidth()) { Text("Add Expense") }
+            Button(
+                onClick = {
+                    vm.addExpense(currentTrip.id, category, amount.toIntOrNull() ?: 0, note, payer?.id)
+                    amount = ""; note = ""
+                },
+                modifier = Modifier.fillMaxWidth(),
+                enabled = (amount.toIntOrNull() ?: 0) > 0
+            ) { Text("Add Expense") }
         }
-        item { Text("Who owes whom", style = MaterialTheme.typography.titleMedium) }
+
         item {
+            Text("Who owes whom", style = MaterialTheme.typography.titleMedium)
             Text(
-                if (travelers.size < 2) "Add at least two travelers to calculate group settlement."
-                else "Each expense is treated as shared equally; the payer is credited automatically.",
+                if (travelers.size < 2) "Add at least two travelers to calculate settlement."
+                else "Shared expenses are split equally. Individual expenses are credited to the selected payer.",
                 style = MaterialTheme.typography.labelSmall
             )
         }
         items(travelers) { t ->
             val paid = expenses.filter { it.travelerId == t.id }.sumOf { it.amountInr }
-            val share = if (travelers.isNotEmpty()) spent.toDouble() / travelers.size else 0.0
+            val share = if (travelers.isEmpty()) 0.0 else spent.toDouble() / travelers.size
             val net = paid - share
-            Text("${t.name}: paid ₹$paid · share ₹${"%.0f".format(share)} · balance ${if (net >= 0) "+" else "-"}₹${"%.0f".format(kotlin.math.abs(net))}")
+            Text("${t.name}: paid ₹$paid · fair share ₹${"%.0f".format(share)} · ${if (net >= 0) "gets" else "owes"} ₹${"%.0f".format(kotlin.math.abs(net))}")
         }
         item {
-            var name by remember { mutableStateOf("") }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedTextField(name, { name = it }, label = { Text("Traveler name") }, modifier = Modifier.weight(1f))
-                Button(onClick = { vm.addTraveler(id, name); name = "" }) { Text("Add") }
+                OutlinedTextField(travelerName, { travelerName = it }, label = { Text("Traveler name") }, modifier = Modifier.weight(1f))
+                Button(onClick = { vm.addTraveler(currentTrip.id, travelerName); travelerName = "" }, enabled = travelerName.isNotBlank()) { Text("Add") }
             }
         }
-        items(travelers) { t -> Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) { Text(t.name); OutlinedButton(onClick = { vm.removeTraveler(t) }) { Text("Remove") } } }
+        items(travelers) { t ->
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(t.name)
+                OutlinedButton(onClick = { vm.removeTraveler(t) }) { Text("Remove") }
+            }
+        }
         item { Text("Expenses", style = MaterialTheme.typography.titleMedium) }
         items(expenses) { e ->
             Card(Modifier.fillMaxWidth()) {
                 Row(Modifier.padding(12.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Column { Text(e.category); if (e.note.isNotBlank()) Text(e.note, style = MaterialTheme.typography.labelSmall); Text(if (e.travelerId == null) "Shared" else "Paid by traveler", style = MaterialTheme.typography.labelSmall) }
-                    Text("₹${e.amountInr}")
+                    Column(Modifier.weight(1f)) {
+                        Text(e.category)
+                        if (e.note.isNotBlank()) Text(e.note, style = MaterialTheme.typography.labelSmall)
+                        Text(if (e.travelerId == null) "Shared expense" else "Paid by selected traveler", style = MaterialTheme.typography.labelSmall)
+                    }
+                    Column {
+                        Text("₹${e.amountInr}")
+                        TextButton(onClick = { vm.deleteExpense(e) }) { Text("Delete") }
+                    }
                 }
             }
         }

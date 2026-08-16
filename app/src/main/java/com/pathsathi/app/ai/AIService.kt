@@ -63,7 +63,7 @@ class OfflineAIFallback(
 /**
  * Integration point for a real online AI service (e.g. the Claude API or
  * another LLM provider) for natural conversation, personalized
- * recommendations, and intelligent itinerary changes. NOT implemented here —
+ * recommendations, and intelligent itinerary changes. intentionally optional —
  * doing so would require a network call and an API key, which must stay
  * optional per the offline-first requirement.
  *

@@ -12,4 +12,5 @@ class BudgetViewModel(app:Application):AndroidViewModel(app){private val repo=(a
  fun addExpense(id:Long,cat:String,amt:Int,note:String,payer:Long?){if(amt<=0)return;viewModelScope.launch{repo.addExpense(BudgetExpenseEntity(tripId=id,category=cat,amountInr=amt,note=note,dateEpochMs=System.currentTimeMillis(),travelerId=payer))}}
  fun addTraveler(id:Long,name:String){if(name.isBlank())return;viewModelScope.launch{repo.saveTraveler(TravelerEntity(tripId=id,name=name.trim()))}}
  fun removeTraveler(t:TravelerEntity)=viewModelScope.launch{repo.deleteTraveler(t)}
+ fun deleteExpense(e:BudgetExpenseEntity)=viewModelScope.launch{repo.deleteExpense(e)}
 }

@@ -9,13 +9,13 @@ package com.pathsathi.app.online
  *   - a small result/model type
  *   - an Offline*Fallback that's always safe to call and never touches the
  *     network
- *   - an Online*Provider interface that is NOT implemented here (needs a
+ *   - an Online*Provider interface that is intentionally optional (needs a
  *     real service + API key, which stays optional)
  *   - an Orchestrator that only calls the online path when connectivity AND
  *     app settings AND a configured provider all say yes, and falls back to
  *     offline on any failure
  *
- * None of this is wired to a real backend. Implementing any of the
+ * These optional providers are kept separate from the offline core. Implementing any of the
  * Online*Provider interfaces later — and passing a real instance into the
  * matching Orchestrator — is the only change needed to go live; no UI or
  * ViewModel code elsewhere needs to change.
