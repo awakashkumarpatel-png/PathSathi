@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The resource shrinker (shrinkResources true, enabled for release builds)
+  only finds resources it can see referenced statically in code. The legal
+  document raw text files are looked up dynamically via
+  Resources.getIdentifier() in LegalScreens.kt (so the same code can pick
+  terms_en/terms_hi or privacy_en/privacy_hi based on the language setting),
+  which the shrinker can't trace - without this file it could strip them from
+  a release build and crash the Terms/Privacy screens at runtime.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@raw/terms_en,@raw/terms_hi,@raw/privacy_en,@raw/privacy_hi" />

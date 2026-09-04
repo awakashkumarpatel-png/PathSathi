@@ -1,0 +1,293 @@
+<resources>
+    <string name="app_name">Path Sathi</string>
+    <string name="tagline">आपकी यात्रा, हमारा साथ</string>
+
+    <!-- Common actions -->
+    <string name="action_back">वापस</string>
+    <string name="action_skip">छोड़ें</string>
+    <string name="action_next">अगला</string>
+    <string name="action_get_started">शुरू करें</string>
+    <string name="action_allow">अनुमति दें</string>
+    <string name="action_save_profile">प्रोफ़ाइल सहेजें</string>
+
+    <!-- Onboarding -->
+    <string name="onboard_title_1">PathSathi में आपका स्वागत है</string>
+    <string name="onboard_desc_1">ट्रेक के लिए आपका स्वचालित यात्रा साथी — ऑफ़लाइन-फर्स्ट, ताकि ट्रेल पर सिग्नल न होने पर भी काम करे।</string>
+    <string name="onboard_title_2">लाइव GPS ट्रैकिंग</string>
+    <string name="onboard_desc_2">अपना रूट, स्पीड और ऊँचाई अपने आप ट्रैक करें। फ़ोन लॉक होने पर भी ट्रैकिंग चलती रहती है।</string>
+    <string name="onboard_title_3">सुरक्षा सबसे पहले</string>
+    <string name="onboard_desc_3">SOS कॉलिंग, सेफ्टी चेक-इन, रूट-डिविएशन अलर्ट, और आस-पास की इमरजेंसी मदद — सब कुछ शामिल है।</string>
+    <string name="onboard_title_4">स्वचालित मौसम</string>
+    <string name="onboard_desc_4">लाइव मौसम, कई दिनों का पूर्वानुमान, और आपके ट्रेक के लिए सुरक्षा अलर्ट।</string>
+    <string name="onboard_setup_title">एक बार की सेटअप</string>
+    <string name="onboard_setup_desc">आपको सुरक्षित रखने के लिए PathSathi को कुछ अनुमतियों की ज़रूरत है।</string>
+    <string name="permission_location_title">लोकेशन</string>
+    <string name="permission_location_desc">लाइव ट्रैकिंग, मौसम, SOS और नज़दीकी मदद के लिए</string>
+    <string name="permission_notifications_title">नोटिफिकेशन</string>
+    <string name="permission_notifications_desc">ट्रैकिंग स्टेटस और सेफ्टी चेक-इन अलर्ट के लिए</string>
+
+    <!-- Settings -->
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="settings_profile_title">प्रोफ़ाइल</string>
+    <string name="settings_profile_subtitle">नाम, फ़ोन, ब्लड ग्रुप, इमरजेंसी नोट</string>
+    <string name="section_app">ऐप</string>
+    <string name="label_language">भाषा</string>
+    <string name="label_units">इकाइयाँ</string>
+    <string name="units_metric">मेट्रिक (km)</string>
+    <string name="units_imperial">इम्पीरियल (mi)</string>
+    <string name="label_theme">थीम</string>
+    <string name="theme_light">लाइट</string>
+    <string name="theme_dark">डार्क</string>
+    <string name="theme_system">सिस्टम</string>
+    <string name="label_notifications">नोटिफिकेशन</string>
+    <string name="section_network">नेटवर्क</string>
+    <string name="network_online_title">ऑनलाइन मोड</string>
+    <string name="network_offline_title">ऑफ़लाइन मोड</string>
+    <string name="network_online_desc">मौसम और नेटवर्क फीचर सक्रिय हैं</string>
+    <string name="network_offline_desc">डेटा बचाने के लिए नेटवर्क फीचर रुके हुए हैं। GPS फिर भी काम करता है।</string>
+    <string name="section_gps_battery">GPS और बैटरी</string>
+    <string name="label_gps_accuracy">GPS सटीकता</string>
+    <string name="gps_high">हाई</string>
+    <string name="gps_balanced">बैलेंस्ड</string>
+    <string name="gps_battery_saver">बैटरी सेवर</string>
+    <string name="label_battery_saver">बैटरी सेवर मोड</string>
+    <string name="battery_saver_desc">बैटरी बचाने के लिए GPS अपडेट फ्रीक्वेंसी कम करता है</string>
+    <string name="section_safety">सुरक्षा और इमरजेंसी</string>
+    <string name="label_sos_countdown">SOS काउंटडाउन</string>
+    <string name="settings_checkin_title">सेफ्टी चेक-इन</string>
+    <string name="settings_checkin_subtitle">शेड्यूल्ड \"क्या आप सुरक्षित हैं?\" रिमाइंडर</string>
+    <string name="settings_nearby_title">नज़दीकी मदद</string>
+    <string name="settings_nearby_subtitle">अस्पताल, पुलिस, फार्मेसी, फायर, रेस्क्यू पॉइंट</string>
+    <string name="section_maps">मैप्स</string>
+    <string name="settings_offline_maps_title">ऑफ़लाइन मैप्स</string>
+    <string name="settings_offline_maps_subtitle">ऑफ़लाइन उपयोग के लिए ट्रेक मैप डाउनलोड करें</string>
+    <string name="section_about">ऐप के बारे में</string>
+    <string name="app_version">वर्शन 1.0</string>
+
+    <!-- Profile -->
+    <string name="profile_title">प्रोफ़ाइल</string>
+    <string name="profile_full_name">पूरा नाम</string>
+    <string name="profile_phone">फ़ोन नंबर</string>
+    <string name="profile_blood_group">ब्लड ग्रुप</string>
+    <string name="profile_emergency_note">इमरजेंसी मेडिकल नोट (एलर्जी, बीमारी, आदि)</string>
+    <string name="profile_saved">प्रोफ़ाइल सहेज ली गई है।</string>
+    <string name="profile_privacy_note">यह जानकारी सिर्फ़ आपके डिवाइस पर रहती है और केवल आपकी अपनी ट्रेक जर्नल, SOS स्क्रीन और चेक-इन लॉग में दिखती है — यह कभी भी कहीं अपलोड नहीं होती।</string>
+
+    <!-- Legal -->
+    <string name="terms_title">नियम व शर्तें</string>
+    <string name="terms_updated">आख़िरी अपडेट: 2026</string>
+    <string name="privacy_title">प्राइवेसी पॉलिसी</string>
+    <string name="privacy_updated">आख़िरी अपडेट: 2026</string>
+    <string name="legal_accept_prefix">मैं स्वीकार करता/करती हूँ</string>
+    <string name="legal_terms_link">नियम व शर्तें</string>
+    <string name="legal_and">और</string>
+    <string name="legal_privacy_link">प्राइवेसी पॉलिसी</string>
+    <string name="settings_legal_section">कानूनी जानकारी</string>
+
+    <!-- Compass -->
+    <string name="compass_title">कम्पास</string>
+    <string name="compass_unavailable">इस डिवाइस में कम्पास सेंसर नहीं है, इसलिए यहाँ लाइव दिशा उपलब्ध नहीं है।</string>
+
+    <!-- SOS -->
+    <string name="sos_title">इमरजेंसी SOS</string>
+    <string name="sos_gps_blocked">GPS ब्लॉक्ड</string>
+    <string name="sos_gps_loading">GPS...</string>
+    <string name="sos_gps_ready">GPS तैयार</string>
+    <string name="sos_gps_unavailable">GPS उपलब्ध नहीं</string>
+    <string name="sos_online">ऑनलाइन</string>
+    <string name="sos_offline">ऑफ़लाइन</string>
+    <string name="sos_permission_denied">लोकेशन परमिशन नहीं दी गई — SOS कॉलिंग फिर भी काम करेगी, पर आपके कोऑर्डिनेट्स शेयर नहीं हो सकते। आप फिर भी मदद के लिए कॉल कर सकते हैं।</string>
+    <string name="sos_grant_permission">लोकेशन परमिशन दें</string>
+    <string name="sos_no_gps_fix">GPS फिक्स नहीं मिला। लोकेशन ऑन है या नहीं देखें।</string>
+    <string name="action_retry">फिर कोशिश करें</string>
+    <string name="sos_calling">इमरजेंसी सेवाओं को कॉल हो रही है...</string>
+    <string name="action_cancel">रद्द करें</string>
+    <string name="sos_press_confirm">मदद के लिए कॉल करने हेतु दबाएँ और कन्फर्म करें</string>
+    <string name="sos_call_button">SOS - इमरजेंसी कॉल करें</string>
+    <string name="sos_i_am_safe">मैं सुरक्षित हूँ - कॉन्टैक्ट को बताएं</string>
+    <string name="sos_add_contacts_prompt">लोकेशन शेयरिंग के लिए इमरजेंसी कॉन्टैक्ट जोड़ें।</string>
+    <string name="sos_message_prepared">आपके कॉन्टैक्ट के लिए मैसेज तैयार है।</string>
+
+    <!-- Check-in -->
+    <string name="checkin_title">सेफ्टी चेक-इन</string>
+    <string name="checkin_enable">चेक-इन सक्षम करें</string>
+    <string name="checkin_enable_desc">ट्रेक के दौरान PathSathi समय-समय पर \"क्या आप सुरक्षित हैं?\" पूछेगा।</string>
+    <string name="checkin_interval">चेक-इन इंटरवल</string>
+    <string name="checkin_grace">अलर्ट से पहले ग्रेस पीरियड</string>
+    <string name="checkin_log">चेक-इन लॉग</string>
+    <string name="checkin_none_yet">अभी तक कोई चेक-इन नहीं।</string>
+    <string name="checkin_confirmed">सुरक्षित पुष्टि हुई</string>
+    <string name="checkin_missed">छूट गया</string>
+    <string name="checkin_pending">लंबित</string>
+    <string name="checkin_prompt_title">क्या आप सुरक्षित हैं?</string>
+    <string name="checkin_prompt_desc">यह आपके ट्रेक के दौरान एक शेड्यूल्ड सेफ्टी चेक-इन है।</string>
+    <string name="checkin_marked_safe">सुरक्षित के रूप में चिह्नित। धन्यवाद!</string>
+    <string name="action_done">पूर्ण</string>
+    <string name="checkin_i_am_safe">मैं सुरक्षित हूँ</string>
+    <string name="action_not_now">अभी नहीं</string>
+
+    <!-- Nearby Help -->
+    <string name="nearby_title">नज़दीकी मदद</string>
+    <string name="nearby_cat_all">सभी</string>
+    <string name="nearby_cat_hospital">अस्पताल</string>
+    <string name="nearby_cat_police">पुलिस</string>
+    <string name="nearby_cat_pharmacy">फार्मेसी</string>
+    <string name="nearby_cat_fire">फायर</string>
+    <string name="nearby_cat_rescue">रेस्क्यू</string>
+    <string name="nearby_location_needed">नज़दीकी मदद खोजने के लिए लोकेशन परमिशन ज़रूरी है।</string>
+    <string name="nearby_load_error">आपकी वर्तमान लोकेशन नहीं मिल सकी</string>
+    <string name="nearby_load_error_generic">नज़दीकी मदद के पॉइंट लोड नहीं हो सके। अपना इंटरनेट कनेक्शन जाँचें।</string>
+    <string name="nearby_couldnt_load">नज़दीकी मदद लोड नहीं हो सकी: %1$s</string>
+    <string name="nearby_none_found">आस-पास कोई मदद पॉइंट नहीं मिला।</string>
+
+    <!-- Offline Maps -->
+    <string name="offline_maps_title">ऑफ़लाइन मैप्स</string>
+    <string name="offline_maps_downloaded">डाउनलोड किए गए मैप्स</string>
+    <string name="offline_maps_none">अभी तक कोई मैप डाउनलोड नहीं हुआ</string>
+    <string name="offline_maps_available">उपलब्ध ट्रेक</string>
+    <string name="offline_maps_download">ऑफ़लाइन के लिए डाउनलोड करें</string>
+    <string name="offline_maps_delete_title">ऑफ़लाइन मैप डिलीट करें?</string>
+    <string name="offline_maps_delete_body">यह %1$s के लिए डाउनलोड किया गया मैप हटा देगा।</string>
+    <string name="action_delete">डिलीट करें</string>
+
+    <!-- Home -->
+    <string name="home_greeting">सुप्रभात! \uD83D\uDC4B</string>
+    <string name="home_plan_new_trip">नई ट्रिप प्लान करें</string>
+    <string name="home_quick_access">क्विक एक्सेस</string>
+    <string name="home_search_placeholder">Sathi से पूछें या ट्रेक खोजें...</string>
+    <string name="qa_trip_planner">ट्रिप प्लानर</string>
+    <string name="qa_my_trips">मेरी ट्रिप्स</string>
+    <string name="qa_navigation">नेविगेशन</string>
+    <string name="qa_tracking">ट्रैकिंग</string>
+    <string name="qa_sos">SOS</string>
+    <string name="qa_journal">जर्नल</string>
+    <string name="qa_favorites">पसंदीदा</string>
+    <string name="qa_contacts">कॉन्टैक्ट</string>
+    <string name="qa_nearby_help">नज़दीकी मदद</string>
+    <string name="qa_history">हिस्ट्री</string>
+
+    <string name="home_offline_weather_error">ऑफ़लाइन मोड ऑन है — मौसम के लिए इंटरनेट कनेक्शन चाहिए</string>
+    <string name="home_location_error">लोकेशन नहीं मिल सकी</string>
+
+    <!-- Emergency Contacts -->
+    <string name="contacts_title">इमरजेंसी कॉन्टैक्ट</string>
+    <string name="contacts_none">अभी तक कोई इमरजेंसी कॉन्टैक्ट नहीं</string>
+    <string name="contacts_none_desc">किसी ऐसे व्यक्ति को जोड़ें जिसे इमरजेंसी में सूचित किया जाए</string>
+    <string name="contacts_primary">प्राथमिक</string>
+    <string name="contacts_set_primary">प्राथमिक के रूप में सेट करें</string>
+    <string name="contacts_add_title">कॉन्टैक्ट जोड़ें</string>
+    <string name="contacts_edit_title">कॉन्टैक्ट एडिट करें</string>
+    <string name="contacts_name_label">नाम</string>
+    <string name="contacts_phone_label">फ़ोन नंबर</string>
+    <string name="action_save">सहेजें</string>
+
+    <!-- Tracking -->
+    <string name="tracking_title">लाइव ट्रैकिंग · %1$s</string>
+    <string name="stat_distance">दूरी</string>
+    <string name="stat_time">समय</string>
+    <string name="stat_speed">स्पीड</string>
+    <string name="stat_max_speed">मैक्स स्पीड</string>
+    <string name="stat_elev_gain">ऊँचाई बढ़त</string>
+    <string name="stat_altitude">ऊँचाई</string>
+    <string name="tracking_waiting_gps">GPS सिग्नल का इंतज़ार... सुनिश्चित करें कि आप खुले आसमान के नीचे बाहर हैं।</string>
+    <string name="tracking_off_route">रूट से %1$dमी दूर</string>
+    <string name="tracking_head_direction">ट्रेल पर वापस जाने के लिए %1$s की ओर जाएँ</string>
+    <string name="tracking_permission_needed">GPS ट्रैकिंग के लिए लोकेशन परमिशन ज़रूरी है।</string>
+    <string name="tracking_background_note">स्क्रीन लॉक करने या ऐप छोड़ने पर भी ट्रैकिंग चलती रहती है — नोटिफिकेशन में लाइव प्रोग्रेस दिखता है।</string>
+    <string name="action_start">शुरू करें</string>
+    <string name="action_resume">फिर से शुरू करें</string>
+    <string name="action_pause">रोकें</string>
+    <string name="action_stop">बंद करें</string>
+    <string name="tracking_route_log">रूट लॉग</string>
+
+    <!-- Map -->
+    <string name="map_default_title">ट्रेक मैप</string>
+    <string name="map_online">ऑनलाइन</string>
+    <string name="map_offline">ऑफ़लाइन</string>
+    <string name="map_trek_not_found">ट्रेक नहीं मिला</string>
+    <string name="map_location_error">आपकी वर्तमान लोकेशन नहीं मिल सकी</string>
+    <string name="map_route_error">अभी रूट नहीं मिल सका — अपना इंटरनेट कनेक्शन जाँचें</string>
+    <string name="map_routing">रूट खोजा जा रहा है...</string>
+    <string name="map_route_from_me">मेरी लोकेशन से रूट</string>
+
+    <!-- Journal -->
+    <string name="journal_title">ट्रेक जर्नल</string>
+    <string name="journal_placeholder">ट्रेक नोट लिखें...</string>
+    <string name="action_add">जोड़ें</string>
+    <string name="journal_empty">अभी तक कोई जर्नल एंट्री नहीं। यहाँ अपनी ट्रेक यादें दर्ज करें।</string>
+
+    <!-- Favorites -->
+    <string name="favorites_title">पसंदीदा</string>
+    <string name="favorites_empty">अभी तक कोई पसंदीदा ट्रेक नहीं</string>
+    <string name="favorites_empty_desc">यहाँ सेव करने के लिए ट्रेक पर दिल वाले आइकन को टैप करें</string>
+
+    <!-- Tracking History -->
+    <string name="tracking_history_title">ट्रैकिंग हिस्ट्री</string>
+    <string name="tracking_history_empty">अभी तक कोई पूरा ट्रेक नहीं</string>
+    <string name="tracking_history_empty_desc">पूरे हुए ट्रैक यहाँ दिखेंगे</string>
+
+    <!-- Trip Planner -->
+    <string name="tp_title">ट्रिप प्लान करें</string>
+    <string name="tp_destination_label">डेस्टिनेशन ट्रेक</string>
+    <string name="tp_starting_point">शुरुआती स्थान</string>
+    <string name="tp_travelers">यात्री</string>
+    <string name="tp_budget">बजट/व्यक्ति (₹)</string>
+    <string name="tp_generating">बन रहा है...</string>
+    <string name="tp_generate">ट्रिप प्लान बनाएं</string>
+    <string name="tp_from_to">%1$s से %2$s तक</string>
+    <string name="tp_approx_travel">%1$s km की दूरी, %2$s से · ~%3$s घंटे यात्रा (सीधी-रेखा अनुमान)</string>
+    <string name="tp_travel_unavailable">दूरी/समय उपलब्ध नहीं (\"%1$s\" खोजने के लिए इंटरनेट चाहिए)</string>
+    <string name="tp_day_wise_plan">दिन-वार योजना</string>
+    <string name="tp_day_label">दिन %1$d: %2$s</string>
+    <string name="tp_stay_label">ठहराव: %1$s</string>
+    <string name="tp_estimated_cost">अनुमानित लागत: ₹%1$s</string>
+    <string name="tp_packing_list">पैकिंग लिस्ट</string>
+    <string name="tp_safety_notes">सुरक्षा नोट्स</string>
+    <string name="tp_best_season">सर्वश्रेष्ठ मौसम: %1$s</string>
+    <string name="action_save_trip">ट्रिप सहेजें</string>
+    <string name="action_share">शेयर करें</string>
+
+    <!-- My Trips -->
+    <string name="mytrips_title">मेरी ट्रिप्स</string>
+    <string name="action_create_trip">ट्रिप बनाएं</string>
+    <string name="mytrips_empty">अभी तक कोई ट्रिप नहीं</string>
+    <string name="mytrips_empty_desc">अपनी पहली ट्रिप बनाएं</string>
+    <string name="mytrips_delete_title">ट्रिप डिलीट करें?</string>
+    <string name="mytrips_delete_body">क्या आप वाकई इस ट्रिप को डिलीट करना चाहते हैं?</string>
+
+    <!-- Create Trip wizard -->
+    <string name="action_select_time">समय चुनें</string>
+    <string name="action_done_wizard">पूर्ण</string>
+    <string name="ct_trip_preview">ट्रिप प्रीव्यू</string>
+    <string name="ct_review_edit">सहेजने से पहले जाँचें और एडिट करें</string>
+
+    <!-- Trip View -->
+    <string name="tripview_title">ट्रिप विवरण</string>
+    <string name="tripview_not_found">ट्रिप नहीं मिली</string>
+
+    <!-- Preview / Saved Itineraries -->
+    <string name="preview_title">सेव्ड इटिनरेरी</string>
+    <string name="action_plan_a_trip">ट्रिप प्लान करें</string>
+    <string name="preview_empty">अभी तक कोई ट्रिप प्लान नहीं</string>
+    <string name="preview_empty_desc">यहाँ प्रीव्यू देखने के लिए एक ट्रिप प्लान करें</string>
+    <string name="preview_delete_title">ट्रिप प्लान डिलीट करें?</string>
+    <string name="preview_delete_body">क्या आप वाकई इस ट्रिप प्लान को डिलीट करना चाहते हैं?</string>
+    <string name="preview_from">%1$s से</string>
+
+    <!-- AI Assistant settings -->
+    <string name="section_ai_assistant">AI Assistant</string>
+    <string name="ai_online_toggle">ऑनलाइन AI (वैकल्पिक)</string>
+    <string name="ai_online_toggle_desc">आपकी अपनी API key se khule sawaalon ko samajhta hai jo built-in assistant nahi samajh paata. Default se off hai; assistant ki baaki सारी features iske bina bhi kaam karti hain।</string>
+    <string name="ai_api_key_label">API key</string>
+    <string name="ai_model_label">Model (वैकल्पिक)</string>
+    <string name="ai_key_privacy_note">Sirf is device par save hoti hai, aapki baaki settings ki tarah. Sirf tab bheji jaati hai jab aap kuch aisa poochte hain jo built-in assistant samajh na paaye aur Online AI on ho।</string>
+
+    <!-- Trek Detail -->
+    <string name="trek_not_found">ट्रेक नहीं मिला</string>
+    <string name="trek_view_route_map">रूट मैप देखें</string>
+    <string name="trek_start_tracking">लाइव ट्रैकिंग शुरू करें</string>
+
+    <!-- Assistant -->
+    <string name="assistant_title">साथी असिस्टेंट</string>
+    <string name="assistant_input_placeholder">मैसेज टाइप करें...</string>
+</resources>

@@ -1,0 +1,11 @@
+.gradle/
+build/
+app/build/
+*.iml
+.idea/
+local.properties
+
+# Real signing secrets - never commit these (see gradle/keystore.properties.template)
+gradle/keystore.properties
+*.jks
+*.keystore

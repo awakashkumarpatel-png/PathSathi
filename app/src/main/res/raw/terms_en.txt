@@ -1,0 +1,27 @@
+1. Acceptance of Terms
+
+By using PathSathi, you agree to these Terms & Conditions and the Privacy Policy. If you do not agree, please do not use the app.
+
+2. Nature of the App
+
+PathSathi is a trekking companion app that provides GPS tracking, weather information, an SOS/emergency-contact helper, safety check-ins, route-deviation alerts, nearby-help lookup, and offline maps. It is designed to assist you, not to replace your own judgment, proper trip planning, physical preparedness, or official emergency services.
+
+3. No Guarantee of Safety
+
+Trekking, hiking, and outdoor travel carry inherent risks including but not limited to injury, extreme weather, terrain hazards, and loss of communication. PathSathi's GPS tracking, SOS, safety check-in, route-deviation, and weather features depend on your device's GPS accuracy, network/internet availability, battery level, and third-party services, none of which can be guaranteed to work at all times. PathSathi does not guarantee that any SOS message, check-in alert, or location will be successfully sent or received, and is not a substitute for a personal locator beacon, satellite communicator, or official emergency services.
+
+4. Your Responsibility
+
+You are responsible for assessing trail conditions, weather, your own fitness, informing others of your plans independently of this app, and carrying appropriate safety equipment. Always contact local emergency services directly in a life-threatening situation.
+
+5. Third-Party Services
+
+Some features (weather, nearby-help lookup, map tiles, routing, and place search) fetch data from free third-party services (such as OpenStreetMap, Open-Meteo, and OSRM). PathSathi is not responsible for the accuracy, availability, or uptime of these third-party services.
+
+6. Limitation of Liability
+
+To the maximum extent permitted by law, PathSathi and its developers are not liable for any injury, loss, damage, or death arising from use of the app, reliance on its features, or failure of any feature to function as expected.
+
+7. Changes
+
+These terms may be updated from time to time as the app evolves. Continued use of the app after changes constitutes acceptance of the updated terms.

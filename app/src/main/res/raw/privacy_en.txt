@@ -1,0 +1,38 @@
+1. What We Collect
+
+PathSathi collects only what it needs to provide its features: your device's GPS location (for tracking, weather, SOS, nearby help, and check-ins), and information you enter yourself (profile name/phone/blood group/emergency note, emergency contacts, journal entries, trip plans).
+
+2. Where It's Stored
+
+All of this data is stored locally on your device (using Room database and DataStore) unless stated otherwise below. PathSathi does not have its own server and does not upload your profile, journal, contacts, or tracking history anywhere.
+
+3. Third-Party Requests
+
+To provide live features, the app sends your coordinates (or a place name you type) to these free, no-account-required services when you actively use the related feature:
+ • Open-Meteo — for weather and forecasts
+ • OpenStreetMap Overpass API — for nearby hospitals/police/pharmacy/fire/rescue points
+ • OpenStreetMap Nominatim — for turning a place name into coordinates (Trip Planner)
+ • OSRM (Open Source Routing Machine) — for road route calculation (Map)
+ • OpenStreetMap tile servers — for map tiles
+
+These requests include only the coordinates/place text needed for that specific lookup - not your name, contacts, or any other profile data - and are not linked to any account, because PathSathi does not have user accounts.
+
+4. Notifications & Alarms
+
+Safety check-in reminders and tracking-status notifications are generated and shown entirely on your device using Android's own notification and alarm system - no data leaves your device for this.
+
+5. No Ads, No Selling Data
+
+PathSathi does not show ads, does not sell your data, and does not share your data with advertisers or data brokers.
+
+6. Your Control
+
+You can edit or delete your profile, emergency contacts, journal entries, and check-in log at any time from within the app. Uninstalling the app removes all locally stored data.
+
+7. Children
+
+PathSathi is not directed at children and does not knowingly collect data from children.
+
+8. Changes
+
+This policy may be updated as the app evolves; continued use after changes constitutes acceptance of the updated policy.

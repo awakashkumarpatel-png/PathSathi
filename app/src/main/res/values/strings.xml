@@ -1,0 +1,295 @@
+<resources>
+    <string name="app_name">Path Sathi</string>
+    <string name="tagline">Your Journey, Our Companion</string>
+
+    <!-- Common actions -->
+    <string name="action_back">Back</string>
+    <string name="action_skip">Skip</string>
+    <string name="action_next">Next</string>
+    <string name="action_get_started">Get Started</string>
+    <string name="action_allow">Allow</string>
+    <string name="action_save_profile">Save Profile</string>
+
+    <!-- Onboarding -->
+    <string name="onboard_title_1">Welcome to PathSathi</string>
+    <string name="onboard_desc_1">Your automatic travel companion for treks — offline-first, so it works even with no signal on the trail.</string>
+    <string name="onboard_title_2">Live GPS Tracking</string>
+    <string name="onboard_desc_2">Track your route, speed, and elevation automatically. Tracking keeps running even if you lock your phone.</string>
+    <string name="onboard_title_3">Safety First</string>
+    <string name="onboard_desc_3">SOS calling, safety check-ins, route-deviation alerts, and nearby emergency help — all built in.</string>
+    <string name="onboard_title_4">Automatic Weather</string>
+    <string name="onboard_desc_4">Live weather, multi-day forecasts, and safety alerts for wherever your trek takes you.</string>
+    <string name="onboard_setup_title">One-time setup</string>
+    <string name="onboard_setup_desc">PathSathi needs a couple of permissions to keep you safe on the trail.</string>
+    <string name="permission_location_title">Location</string>
+    <string name="permission_location_desc">For live tracking, weather, SOS, and nearby help</string>
+    <string name="permission_notifications_title">Notifications</string>
+    <string name="permission_notifications_desc">For tracking status and safety check-in alerts</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_profile_title">Profile</string>
+    <string name="settings_profile_subtitle">Name, phone, blood group, emergency note</string>
+    <string name="section_app">App</string>
+    <string name="label_language">Language</string>
+    <string name="label_units">Units</string>
+    <string name="units_metric">Metric (km)</string>
+    <string name="units_imperial">Imperial (mi)</string>
+    <string name="label_theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">System</string>
+    <string name="label_notifications">Notifications</string>
+    <string name="section_network">Network</string>
+    <string name="network_online_title">Online Mode</string>
+    <string name="network_offline_title">Offline Mode</string>
+    <string name="network_online_desc">Weather and network features are active</string>
+    <string name="network_offline_desc">Network features are paused to save data. GPS still works.</string>
+    <string name="section_gps_battery">GPS &amp; Battery</string>
+    <string name="label_gps_accuracy">GPS accuracy</string>
+    <string name="gps_high">High</string>
+    <string name="gps_balanced">Balanced</string>
+    <string name="gps_battery_saver">Battery saver</string>
+    <string name="label_battery_saver">Battery Saver Mode</string>
+    <string name="battery_saver_desc">Reduces GPS update frequency to extend battery life</string>
+    <string name="section_safety">Safety &amp; Emergency</string>
+    <string name="label_sos_countdown">SOS countdown</string>
+    <string name="settings_checkin_title">Safety Check-in</string>
+    <string name="settings_checkin_subtitle">Scheduled \"are you safe?\" reminders</string>
+    <string name="settings_nearby_title">Nearby Help</string>
+    <string name="settings_nearby_subtitle">Hospitals, police, pharmacy, fire, rescue points</string>
+    <string name="section_maps">Maps</string>
+    <string name="settings_offline_maps_title">Offline Maps</string>
+    <string name="settings_offline_maps_subtitle">Download trek maps for offline use</string>
+    <string name="section_about">About</string>
+    <string name="app_version">Version 1.0</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_full_name">Full name</string>
+    <string name="profile_phone">Phone number</string>
+    <string name="profile_blood_group">Blood group</string>
+    <string name="profile_emergency_note">Emergency medical note (allergies, conditions, etc.)</string>
+    <string name="profile_saved">Profile saved.</string>
+    <string name="profile_privacy_note">This info stays on your device and is only shown in your own trek journal, SOS screen, and check-in log — it is never uploaded anywhere.</string>
+
+    <!-- Legal: Terms & Conditions -->
+    <string name="terms_title">Terms &amp; Conditions</string>
+    <string name="terms_updated">Last updated: 2026</string>
+
+    <!-- Legal: Privacy Policy -->
+    <string name="privacy_title">Privacy Policy</string>
+    <string name="privacy_updated">Last updated: 2026</string>
+    <string name="legal_accept_prefix">I accept the</string>
+    <string name="legal_terms_link">Terms &amp; Conditions</string>
+    <string name="legal_and">and</string>
+    <string name="legal_privacy_link">Privacy Policy</string>
+    <string name="settings_legal_section">Legal</string>
+
+    <!-- Compass -->
+    <string name="compass_title">Compass</string>
+    <string name="compass_unavailable">This device doesn\'t have a compass sensor, so a live heading isn\'t available here.</string>
+
+    <!-- SOS -->
+    <string name="sos_title">Emergency SOS</string>
+    <string name="sos_gps_blocked">GPS blocked</string>
+    <string name="sos_gps_loading">GPS...</string>
+    <string name="sos_gps_ready">GPS ready</string>
+    <string name="sos_gps_unavailable">GPS unavailable</string>
+    <string name="sos_online">Online</string>
+    <string name="sos_offline">Offline</string>
+    <string name="sos_permission_denied">Location permission denied — SOS calling still works, but your coordinates can\'t be shared. You can still call for help.</string>
+    <string name="sos_grant_permission">Grant location permission</string>
+    <string name="sos_no_gps_fix">Couldn\'t get a GPS fix. Make sure location is turned on.</string>
+    <string name="action_retry">Retry</string>
+    <string name="sos_calling">Calling emergency services...</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="sos_press_confirm">Press and confirm to call for help</string>
+    <string name="sos_call_button">SOS - Call Emergency</string>
+    <string name="sos_i_am_safe">I Am Safe - Notify Contacts</string>
+    <string name="sos_add_contacts_prompt">Add emergency contacts to enable location sharing.</string>
+    <string name="sos_message_prepared">Message prepared for your contact.</string>
+
+    <!-- Check-in -->
+    <string name="checkin_title">Safety Check-in</string>
+    <string name="checkin_enable">Enable check-ins</string>
+    <string name="checkin_enable_desc">PathSathi will periodically ask \"are you safe?\" during a trek.</string>
+    <string name="checkin_interval">Check-in interval</string>
+    <string name="checkin_grace">Grace period before alert</string>
+    <string name="checkin_log">Check-in log</string>
+    <string name="checkin_none_yet">No check-ins yet.</string>
+    <string name="checkin_confirmed">Confirmed safe</string>
+    <string name="checkin_missed">Missed</string>
+    <string name="checkin_pending">Pending</string>
+    <string name="checkin_prompt_title">Are you safe?</string>
+    <string name="checkin_prompt_desc">This is a scheduled safety check-in during your trek.</string>
+    <string name="checkin_marked_safe">Marked as safe. Thanks!</string>
+    <string name="action_done">Done</string>
+    <string name="checkin_i_am_safe">I Am Safe</string>
+    <string name="action_not_now">Not now</string>
+
+    <!-- Nearby Help -->
+    <string name="nearby_title">Nearby Help</string>
+    <string name="nearby_cat_all">All</string>
+    <string name="nearby_cat_hospital">Hospital</string>
+    <string name="nearby_cat_police">Police</string>
+    <string name="nearby_cat_pharmacy">Pharmacy</string>
+    <string name="nearby_cat_fire">Fire</string>
+    <string name="nearby_cat_rescue">Rescue</string>
+    <string name="nearby_location_needed">Location permission is needed to find nearby help.</string>
+    <string name="nearby_load_error">Could not get your current location</string>
+    <string name="nearby_load_error_generic">Could not load nearby help points. Check your internet connection.</string>
+    <string name="nearby_couldnt_load">Couldn\'t load nearby help: %1$s</string>
+    <string name="nearby_none_found">No help points found nearby.</string>
+
+    <!-- Offline Maps -->
+    <string name="offline_maps_title">Offline Maps</string>
+    <string name="offline_maps_downloaded">Downloaded Maps</string>
+    <string name="offline_maps_none">No maps downloaded yet</string>
+    <string name="offline_maps_available">Available Treks</string>
+    <string name="offline_maps_download">Download for Offline</string>
+    <string name="offline_maps_delete_title">Delete offline map?</string>
+    <string name="offline_maps_delete_body">This will remove the downloaded map for %1$s.</string>
+    <string name="action_delete">Delete</string>
+
+    <!-- Home -->
+    <string name="home_greeting">Good Morning! \uD83D\uDC4B</string>
+    <string name="home_plan_new_trip">Plan New Trip</string>
+    <string name="home_quick_access">Quick Access</string>
+    <string name="home_search_placeholder">Ask Sathi or search treks...</string>
+    <string name="qa_trip_planner">Trip Planner</string>
+    <string name="qa_my_trips">My Trips</string>
+    <string name="qa_navigation">Navigation</string>
+    <string name="qa_tracking">Tracking</string>
+    <string name="qa_sos">SOS</string>
+    <string name="qa_journal">Journal</string>
+    <string name="qa_favorites">Favorites</string>
+    <string name="qa_contacts">Contacts</string>
+    <string name="qa_nearby_help">Nearby Help</string>
+    <string name="qa_history">History</string>
+
+    <string name="home_offline_weather_error">Offline mode is on — weather needs an internet connection</string>
+    <string name="home_location_error">Could not get location</string>
+
+    <!-- Emergency Contacts -->
+    <string name="contacts_title">Emergency Contacts</string>
+    <string name="contacts_none">No emergency contacts yet</string>
+    <string name="contacts_none_desc">Add someone who should be alerted in an emergency</string>
+    <string name="contacts_primary">Primary</string>
+    <string name="contacts_set_primary">Set as primary</string>
+    <string name="contacts_add_title">Add Contact</string>
+    <string name="contacts_edit_title">Edit Contact</string>
+    <string name="contacts_name_label">Name</string>
+    <string name="contacts_phone_label">Phone number</string>
+    <string name="action_save">Save</string>
+
+    <!-- Tracking -->
+    <string name="tracking_title">Live Tracking · %1$s</string>
+    <string name="stat_distance">Distance</string>
+    <string name="stat_time">Time</string>
+    <string name="stat_speed">Speed</string>
+    <string name="stat_max_speed">Max Speed</string>
+    <string name="stat_elev_gain">Elev. Gain</string>
+    <string name="stat_altitude">Altitude</string>
+    <string name="tracking_waiting_gps">Waiting for GPS signal... make sure you\'re outdoors with a clear sky view.</string>
+    <string name="tracking_off_route">Off route by %1$dm</string>
+    <string name="tracking_head_direction">Head %1$s to return to the trail</string>
+    <string name="tracking_permission_needed">Location permission needed for GPS tracking.</string>
+    <string name="tracking_background_note">Tracking continues even if you lock the screen or leave the app — a notification shows live progress.</string>
+    <string name="action_start">Start</string>
+    <string name="action_resume">Resume</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_stop">Stop</string>
+    <string name="tracking_route_log">Route log</string>
+
+    <!-- Map -->
+    <string name="map_default_title">Trek Map</string>
+    <string name="map_online">Online</string>
+    <string name="map_offline">Offline</string>
+    <string name="map_trek_not_found">Trek not found</string>
+    <string name="map_location_error">Could not get your current location</string>
+    <string name="map_route_error">Couldn\'t fetch a route right now — check your internet connection</string>
+    <string name="map_routing">Routing...</string>
+    <string name="map_route_from_me">Route from me</string>
+
+    <!-- Journal -->
+    <string name="journal_title">Trek Journal</string>
+    <string name="journal_placeholder">Write a trek note...</string>
+    <string name="action_add">Add</string>
+    <string name="journal_empty">No journal entries yet. Log your trek memories here.</string>
+
+    <!-- Favorites -->
+    <string name="favorites_title">Favorites</string>
+    <string name="favorites_empty">No favorite treks yet</string>
+    <string name="favorites_empty_desc">Tap the heart on a trek to save it here</string>
+
+    <!-- Tracking History -->
+    <string name="tracking_history_title">Tracking History</string>
+    <string name="tracking_history_empty">No completed treks yet</string>
+    <string name="tracking_history_empty_desc">Finished tracks will appear here</string>
+
+    <!-- Trip Planner -->
+    <string name="tp_title">Plan a Trip</string>
+    <string name="tp_destination_label">Destination trek</string>
+    <string name="tp_starting_point">Starting point</string>
+    <string name="tp_travelers">Travelers</string>
+    <string name="tp_budget">Budget/person (₹)</string>
+    <string name="tp_generating">Generating...</string>
+    <string name="tp_generate">Generate Trip Plan</string>
+    <string name="tp_from_to">From %1$s to %2$s</string>
+    <string name="tp_approx_travel">Approx. %1$s km from %2$s · ~%3$s hrs travel (straight-line estimate)</string>
+    <string name="tp_travel_unavailable">Travel distance/time unavailable (needs internet to look up \"%1$s\")</string>
+    <string name="tp_day_wise_plan">Day-wise plan</string>
+    <string name="tp_day_label">Day %1$d: %2$s</string>
+    <string name="tp_stay_label">Stay: %1$s</string>
+    <string name="tp_estimated_cost">Estimated cost: ₹%1$s</string>
+    <string name="tp_packing_list">Packing list</string>
+    <string name="tp_safety_notes">Safety notes</string>
+    <string name="tp_best_season">Best season: %1$s</string>
+    <string name="action_save_trip">Save Trip</string>
+    <string name="action_share">Share</string>
+
+    <!-- My Trips -->
+    <string name="mytrips_title">My Trips</string>
+    <string name="action_create_trip">Create Trip</string>
+    <string name="mytrips_empty">No trips yet</string>
+    <string name="mytrips_empty_desc">Create your first trip</string>
+    <string name="mytrips_delete_title">Delete trip?</string>
+    <string name="mytrips_delete_body">Are you sure you want to delete this trip?</string>
+
+    <!-- Create Trip wizard -->
+    <string name="action_select_time">Select time</string>
+    <string name="action_done_wizard">Done</string>
+    <string name="ct_trip_preview">Trip Preview</string>
+    <string name="ct_review_edit">Review and edit before saving</string>
+
+    <!-- Trip View -->
+    <string name="tripview_title">Trip Details</string>
+    <string name="tripview_not_found">Trip not found</string>
+
+    <!-- Preview / Saved Itineraries -->
+    <string name="preview_title">Saved Itineraries</string>
+    <string name="action_plan_a_trip">Plan a Trip</string>
+    <string name="preview_empty">No trip plans yet</string>
+    <string name="preview_empty_desc">Plan a trip to see its preview here</string>
+    <string name="preview_delete_title">Delete trip plan?</string>
+    <string name="preview_delete_body">Are you sure you want to delete this trip plan?</string>
+    <string name="preview_from">From %1$s</string>
+
+    <!-- AI Assistant settings -->
+    <string name="section_ai_assistant">AI Assistant</string>
+    <string name="ai_online_toggle">Online AI (optional)</string>
+    <string name="ai_online_toggle_desc">Uses your own API key to understand open-ended questions the built-in assistant can\'t. Off by default; everything else about the assistant works without this.</string>
+    <string name="ai_api_key_label">API key</string>
+    <string name="ai_model_label">Model (optional)</string>
+    <string name="ai_key_privacy_note">Stored only on this device, like your other settings. Only sent to the AI provider when you send a message the built-in assistant can\'t understand and Online AI is on.</string>
+
+    <!-- Trek Detail -->
+    <string name="trek_not_found">Trek not found</string>
+    <string name="trek_view_route_map">View Route Map</string>
+    <string name="trek_start_tracking">Start Live Tracking</string>
+
+    <!-- Assistant -->
+    <string name="assistant_title">Sathi Assistant</string>
+    <string name="assistant_input_placeholder">Type a message...</string>
+</resources>

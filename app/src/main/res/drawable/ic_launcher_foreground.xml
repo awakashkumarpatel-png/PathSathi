@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Adaptive-icon foreground layer. Wraps the existing branded PathSathi
+  logo bitmap (compass + mountain road, teal-green on black, already used
+  for the legacy per-density mipmap icons) with an 18% inset on every side
+  so it sits safely inside the adaptive-icon "safe zone" and isn't clipped
+  by circular/squircle/rounded-square masks on different launchers.
+-->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="18%"
+    android:insetTop="18%"
+    android:insetRight="18%"
+    android:insetBottom="18%">
+    <bitmap
+        android:src="@mipmap/ic_launcher"
+        android:gravity="center" />
+</inset>
